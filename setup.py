@@ -34,7 +34,7 @@ class SQLiteTest(Command):
         if self.distribution.tests_require:
             self.distribution.fetch_build_eggs(self.distribution.tests_require)
 
-        os.environ['TRYTOND_DATABASE_URI'] = 'sqlite://'
+        os.environ['DATABASE_URI'] = 'sqlite://'
         os.environ['DB_NAME'] = ':memory:'
 
         from tests import suite
@@ -63,7 +63,7 @@ class PostgresTest(Command):
         if self.distribution.tests_require:
             self.distribution.fetch_build_eggs(self.distribution.tests_require)
 
-        os.environ['TRYTOND_DATABASE_URI'] = 'postgresql://'
+        os.environ['DATABASE_URI'] = 'postgresql://'
         os.environ['DB_NAME'] = 'test_' + str(int(time.time()))
 
         from tests import suite
