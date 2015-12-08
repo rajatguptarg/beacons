@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, render_template
 
 portal = Blueprint('portal', __name__)
 
@@ -10,4 +10,4 @@ def home():
     """
     Render Home Page
     """
-    return "HELLO WORLD"
+    return render_template('index.jinja')
