@@ -3,6 +3,8 @@ Beacon Management Portal
 
 
 [![Build Status](https://travis-ci.org/rajatguptarg/beacons.svg)](https://travis-ci.org/rajatguptarg/beacons)
+[![Coverage Status](https://coveralls.io/repos/rajatguptarg/beacons/badge.svg?branch=master&service=github)](https://coveralls.io/github/rajatguptarg/beacons?branch=master)
+[![Code Climate](https://codeclimate.com/github/rajatguptarg/beacons/badges/gpa.svg)](https://codeclimate.com/github/rajatguptarg/beacons)
 
 
 This is basic web application to manage your beacons.

@@ -1,6 +1,6 @@
 from flask import Flask
+from beacons.portal.views import portal
 
 app = Flask(__name__)
 
-from beacons.portal.views import portal
 app.register_blueprint(portal)
