@@ -1,6 +1,10 @@
 Beacon Management Portal
 =========================
 
+
+[![Build Status](https://travis-ci.org/rajatguptarg/beacons.svg)](https://travis-ci.org/rajatguptarg/beacons)
+
+
 This is basic web application to manage your beacons.
 
 

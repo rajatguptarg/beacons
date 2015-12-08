@@ -1,0 +1,16 @@
+language: python
+virtualenv:
+  system_site_packages: true
+python:
+  - "2.7"
+before_install:
+  - sudo apt-get install python-lxml
+install:
+  - pip install psycopg2
+  - pip install flask
+  - pip install flake8
+  - pip install flask-sqlalchemy
+script: nosetests
+notifications:
+  email:
+  - rajat.gupta712@gmail.com
