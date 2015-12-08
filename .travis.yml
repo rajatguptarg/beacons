@@ -10,7 +10,8 @@ install:
   - pip install flask
   - pip install flake8
   - pip install flask-sqlalchemy
-script: nosetests
+script:
+  - flake8 .
 notifications:
   email:
   - rajat.gupta712@gmail.com
