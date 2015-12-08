@@ -3,7 +3,8 @@ import os
 import sys
 import time
 import unittest
-from setuptools import setup, Command
+from setuptools import Command
+from distutils.core import setup
 
 
 def get_files(root):
@@ -84,19 +85,19 @@ PREFIX = "my"
 
 setup(
     name='%s_%s' % (PREFIX, MODULE),
-    version='1.0',
+    version='0.2',
     packages=['tests', 'beacons', 'beacons.portal'],
-    url='',
-    license='GPL-3',
+    url='https://www.github.com/rajatguptarg/beacons',
+    license='MIT',
     author='Rajat Gupta',
     author_email='rajat.gupta712@gmail.com',
     description='Beacon Manager',
     zip_safe=False,
     classifiers=[
-        'Development Status :: 1 - Beta',
+        'Development Status :: 1 - Planning',
         'Environment :: Plugins',
         'Intended Audience :: Developers',
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',

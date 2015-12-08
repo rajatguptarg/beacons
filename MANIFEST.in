@@ -4,6 +4,7 @@ include COPYRIGHT
 include CHANGELOG
 include MIGRATION
 include LICENSE
+include MANIFEST
 include Makefile
 include *.txt
 include *.md
