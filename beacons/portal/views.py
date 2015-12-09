@@ -2,13 +2,14 @@ from flask import Blueprint, render_template
 import json
 from flask.ext.session import Session
 import flask
-import httplib2
-
-from apiclient import discovery
+# import httplib2
+import requests
+# from apiclient import discovery
 from oauth2client import client
 
 portal = Blueprint('portal', __name__)
 sess = Session()
+s = requests.Session()
 
 
 @portal.route('/index')
@@ -30,17 +31,20 @@ def index():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        http_auth = credentials.authorize(httplib2.Http())
-        drive_service = discovery.build('drive', 'v2', http_auth)
-        files = drive_service.files().list().execute()
-        return json.dumps(files)
+        r = s.get(
+            'https://proximitybeacon.googleapis.com/v1beta1/beacons',
+            headers={
+                'Authorization': 'Bearer ' + credentials.access_token
+            }
+        )
+        return json.dumps(r.content)
 
 
 @portal.route('/oauth2callback')
 def oauth2callback():
     flow = client.flow_from_clientsecrets(
         'client_secrets.json',
-        scope='https://www.googleapis.com/auth/drive.metadata.readonly',
+        scope='https://www.googleapis.com/auth/userlocation.beacon.registry',
         redirect_uri=flask.url_for('portal.oauth2callback', _external=True),
     )
     if 'code' not in flask.request.args:
