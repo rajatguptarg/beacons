@@ -3,8 +3,10 @@ __pycache__/
 *.py[cod]
 .coveralls.yml
 .pypirc
+.DS_Store
 # C extensions
 *.so
+client_secrets.json
 
 # Distribution / packaging
 .Python
