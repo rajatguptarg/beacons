@@ -1,15 +1,12 @@
 from flask import Blueprint, render_template
-import json
 from flask.ext.session import Session
 import flask
-# import httplib2
 import requests
-# from apiclient import discovery
 from oauth2client import client
 
 portal = Blueprint('portal', __name__)
 sess = Session()
-s = requests.Session()
+session = requests.Session()
 
 
 @portal.route('/index')
@@ -31,13 +28,13 @@ def index():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        r = s.get(
+        request = session.get(
             'https://proximitybeacon.googleapis.com/v1beta1/beacons',
             headers={
                 'Authorization': 'Bearer ' + credentials.access_token
             }
         )
-        return json.dumps(r.content)
+        return render_template('beacons.jinja', beacons=request.content)
 
 
 @portal.route('/oauth2callback')
