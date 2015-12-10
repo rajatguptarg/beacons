@@ -55,7 +55,12 @@ def register_beacons():
     return render_template('register.jinja')
 
 
-@portal.route('/status', methods=['POST'])
+@portal.route('/unregister')
+def unregister_beacons():
+    return render_template('unregister.jinja')
+
+
+@portal.route('/registration-status', methods=['POST'])
 def beacon_registration_status():
     if 'credentials' not in flask.session:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
@@ -93,3 +98,42 @@ def beacon_registration_status():
                 'registration_status.jinja',
                 status=json.loads(response.content)['error']
             )
+
+        return render_template(
+            'registration_status.jinja',
+            status=json.loads(response.content)['success']
+        )
+
+
+@portal.route('/unregistration-status', methods=['POST'])
+def beacon_unregistration_status():
+    if 'credentials' not in flask.session:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    credentials = client.OAuth2Credentials.from_json(
+        flask.session['credentials']
+    )
+
+    if credentials.access_token_expired:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    else:
+        beacon_name = request.form.get('name')
+
+        header = {
+            'Authorization': 'Bearer ' + credentials.access_token
+        }
+
+        url = 'https://proximitybeacon.googleapis.com/v1beta1/'
+        url += beacon_name + ':deactivate'
+
+        response = requests.post(url, headers=header)
+
+        if response.status_code == 400:
+            return render_template(
+                'unregistration_status.jinja',
+                status='ERROR'
+            )
+
+        return render_template(
+            'unregistration_status.jinja',
+            status='SUCCESS'
+        )
