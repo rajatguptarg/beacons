@@ -1,0 +1,9 @@
+{% extends "base.jinja" %}
+
+{% block title %} Status {% endblock %}
+
+{% block content%}
+    <strong>Code:</strong> {{ status.code }}<br>
+    <strong>Status:</strong> {{ status.status }}<br>
+    <strong>Message:</strong> {{ status.message }}<br>
+{% endblock %}

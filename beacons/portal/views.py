@@ -87,4 +87,9 @@ def beacon_registration_status():
             data=json.dumps(request_body),
             headers=header
         )
-        return response.content
+
+        if response.status_code == 400:
+            return render_template(
+                'registration_status.jinja',
+                status=json.loads(response.content)['error']
+            )
