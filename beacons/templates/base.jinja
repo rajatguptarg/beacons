@@ -6,7 +6,13 @@
     <title>{% block title %}{% endblock %} - Beacons</title>
     {% endblock %}
 </head>
-<body>
+<body align=center>
+    <div class="row">
+        <div class="col-md-10">&nbsp;</div>
+        <div class="col-md-2"><br>
+            <button type="button" class="btn btn-primary" onclick="location.href='/'">Home</button>
+        </div>
+    </div>
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer">
         {% block footer %}

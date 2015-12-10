@@ -5,5 +5,48 @@
 {% endblock %}
 
 {% block content %}
-    In Progess
+    <legend><h1>
+        Register Beacon
+    </h1></legend>
+    <br>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <form class="form-horizontal" action="{{ url_for('portal.beacon_registration_status') }}" method="post">
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="name">Advertised ID:</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" name="advid" placeholder="Enter Advertised Id of beacon">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-3">Status:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control" name="status">
+                            <option>ACTIVE</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-3">Type:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control" name="type">
+                            <option>EDDYSTONE</option>
+                            <option>iBEACON</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-xs-offset-4 col-xs-8">
+                        <input type="submit" class="btn btn-success" value="Submit">
+                        <input type="reset" class="btn btn-danger" value="Reset">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4"></div></div>
+    </div>
 {% endblock %}

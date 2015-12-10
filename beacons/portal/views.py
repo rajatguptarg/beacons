@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, request
 from flask.ext.session import Session
 import flask
 import requests
@@ -21,14 +21,14 @@ def list_beacons():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        request = session.get(
+        auth_request = session.get(
             'https://proximitybeacon.googleapis.com/v1beta1/beacons',
             headers={
                 'Authorization': 'Bearer ' + credentials.access_token
             }
         )
         return render_template(
-            'beacons.jinja', beacons=json.loads(request.content)
+            'beacons.jinja', beacons=json.loads(auth_request.content)
         )
 
 
@@ -52,6 +52,11 @@ def oauth2callback():
 
 @portal.route('/register')
 def register_beacons():
+    return render_template('register.jinja')
+
+
+@portal.route('/status', methods=['POST'])
+def beacon_registration_status():
     if 'credentials' not in flask.session:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     credentials = client.OAuth2Credentials.from_json(
@@ -61,4 +66,25 @@ def register_beacons():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        return render_template('register.jinja')
+        advertised_id = request.form.get('advid')
+        status = request.form.get('status')
+        beacon_type = request.form.get('type')
+
+        request_body = {
+            "advertisedId": {
+                "type": beacon_type,
+                "id": advertised_id,
+            },
+            "status": status,
+        }
+
+        header = {
+            'Authorization': 'Bearer ' + credentials.access_token
+        }
+
+        response = requests.post(
+            'https://proximitybeacon.googleapis.com/v1beta1/beacons:register',
+            data=json.dumps(request_body),
+            headers=header
+        )
+        return response.content
