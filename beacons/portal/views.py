@@ -3,28 +3,21 @@ from flask.ext.session import Session
 import flask
 import requests
 from oauth2client import client
+import json
 
 portal = Blueprint('portal', __name__)
 sess = Session()
 session = requests.Session()
 
 
-@portal.route('/index')
-@portal.route('/home')
-def home():
-    """
-    Render Home Page
-    """
-    return render_template('index.jinja')
-
-
 @portal.route('/')
-def index():
+def list_beacons():
     if 'credentials' not in flask.session:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     credentials = client.OAuth2Credentials.from_json(
         flask.session['credentials']
     )
+
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
@@ -34,7 +27,9 @@ def index():
                 'Authorization': 'Bearer ' + credentials.access_token
             }
         )
-        return render_template('beacons.jinja', beacons=request.content)
+        return render_template(
+            'beacons.jinja', beacons=json.loads(request.content)
+        )
 
 
 @portal.route('/oauth2callback')
@@ -44,6 +39,7 @@ def oauth2callback():
         scope='https://www.googleapis.com/auth/userlocation.beacon.registry',
         redirect_uri=flask.url_for('portal.oauth2callback', _external=True),
     )
+
     if 'code' not in flask.request.args:
         auth_uri = flow.step1_get_authorize_url()
         return flask.redirect(auth_uri)
@@ -51,4 +47,18 @@ def oauth2callback():
         auth_code = flask.request.args.get('code')
         credentials = flow.step2_exchange(auth_code)
         flask.session['credentials'] = credentials.to_json()
-        return flask.redirect(flask.url_for('portal.index'))
+        return flask.redirect(flask.url_for('portal.list_beacons'))
+
+
+@portal.route('/register')
+def register_beacons():
+    if 'credentials' not in flask.session:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    credentials = client.OAuth2Credentials.from_json(
+        flask.session['credentials']
+    )
+
+    if credentials.access_token_expired:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    else:
+        return render_template('register.jinja')

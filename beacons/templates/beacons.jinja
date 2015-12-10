@@ -1,1 +1,59 @@
-Hello <br> {{ beacons }}
+{% extends "base.jinja" %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        <h1>Hola, <strong>KIAB</strong></h1>
+    </div>
+    <div class="col-md-7"><br><br>&nbsp;</div>
+    <div class="col-md-2"><br>
+        <button type="button" class="btn btn-primary" onclick="location.href='register'">Register Beacon</button>
+        <br><br>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <legend>
+            <h1>
+                <strong>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    Beacon Manager
+                </strong>
+            </h1>
+        </legend>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <table class="table table-bordered" align="center">
+            <tr class="active">
+                <th class="info">Sno.</th>
+                <th class="info">Name</th>
+                <th class="info" class="info" class="info" class="info">Type</th>
+                <th class="info" class="info" class="info">Advertised ID</th>
+                <th class="info" class="info">Status</th>
+            </tr>
+            {% for beacon in beacons.beacons %}
+                <tr class="active">
+                    <td class="active">{{ loop.index }}</td>
+                    <td class="active">{{ beacon.beaconName }}</td>
+                    <td class="active">{{ beacon.advertisedId.type }}</td>
+                    <td class="active">{{ beacon.advertisedId.id }}</td>
+                    <td class="active">{{ beacon.status }}</td>
+                </tr>
+            {% endfor %}
+            <br>
+        </table>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+{% endblock %}
