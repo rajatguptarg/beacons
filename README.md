@@ -22,3 +22,9 @@ this application:
 **[3]** Now you are done, run your app by firing command `python run.py`
 
 Now your server is started, Go to browser and open the URL: `127.0.0.1:5000`
+
+
+TODO
+====
+
+Increase the test coverage.
