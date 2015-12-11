@@ -1,11 +1,12 @@
 language: python
+sudo: false
 virtualenv:
   system_site_packages: true
 python:
   - "2.7"
 install:
-  - sudo pip install urllib3 --upgrade
-  - sudo pip install --upgrade google-api-python-client
+  - pip install urllib3 --upgrade
+  - pip install --upgrade google-api-python-client
   - pip install -r requirements.txt
   - pip install coveralls
 script: tox
