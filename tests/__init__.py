@@ -1,5 +1,6 @@
 import unittest
 from .test_nothing import TestNothing
+from .test_views import TestViews
 
 
 def suite():
@@ -9,6 +10,7 @@ def suite():
     test_suite = unittest.TestSuite()
     test_suite.addTests([
         unittest.TestLoader().loadTestsFromTestCase(TestNothing),
+        unittest.TestLoader().loadTestsFromTestCase(TestViews),
     ])
     return test_suite
 
