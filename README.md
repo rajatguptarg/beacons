@@ -27,4 +27,4 @@ Now your server is started, Go to browser and open the URL: `127.0.0.1:5000`
 TODO
 ====
 
-Increase the test coverage.
+Increase the test coverage to atleast 80%.
