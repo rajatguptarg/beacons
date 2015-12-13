@@ -85,7 +85,7 @@ PREFIX = "my"
 
 setup(
     name='%s_%s' % (PREFIX, MODULE),
-    version='0.2',
+    version='1.0',
     packages=['tests', 'beacons', 'beacons.portal'],
     url='https://www.github.com/rajatguptarg/beacons',
     license='MIT',
