@@ -5,6 +5,8 @@ include CHANGELOG
 include MIGRATION
 include LICENSE
 include MANIFEST
+exclude TODO
+exclude *.json
 include Makefile
 include *.txt
 include *.md
