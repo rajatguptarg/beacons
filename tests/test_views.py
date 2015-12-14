@@ -1,9 +1,25 @@
+import os
 import unittest
 from flask import request
 from beacons import app
 
 
+if 'DB_NAME' not in os.environ:
+    os.environ['DATABASE_URI'] = 'sqlite://'
+    os.environ['DB_NAME'] = ':memory:'
+
+
 class TestViews(unittest.TestCase):
+    def setUp(self):
+        app.config['TESTING'] = True
+        app.config['WTF_CSRF_ENABLED'] = False
+        app.config['DATABASE_URI'] = \
+            os.environ.get('DATABASE_URI') + os.environ.get('DB_NAME')
+        self.app = app.test_client()
+
+    def tearDown(self):
+        pass
+
     def test_0000_test_list_beacons(self):
         self.assertEqual(200, 200)
 
@@ -21,7 +37,7 @@ class TestViews(unittest.TestCase):
             assert request.path == '/oauth2callback'
             assert request.method == 'GET'
 
-    def test_0020_test_register_beacon(self):
+    def test_0030_test_register_beacon(self):
         with app.test_request_context('/register', method='GET'):
             # now you can do something with the request until the
             # end of the with block, such as basic assertions:
