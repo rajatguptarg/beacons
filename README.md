@@ -5,6 +5,9 @@ Beacon Management Portal
 [![Build Status](https://travis-ci.org/rajatguptarg/beacons.svg)](https://travis-ci.org/rajatguptarg/beacons)
 [![Coverage Status](https://coveralls.io/repos/rajatguptarg/beacons/badge.svg?branch=master&service=github)](https://coveralls.io/github/rajatguptarg/beacons?branch=master)
 [![Code Climate](https://codeclimate.com/github/rajatguptarg/beacons/badges/gpa.svg)](https://codeclimate.com/github/rajatguptarg/beacons)
+[![PyPI version](https://badge.fury.io/py/my_beacon_manager.svg)](https://badge.fury.io/py/my_beacon_manager)
+[![Code Health](https://landscape.io/github/rajatguptarg/beacons/master/landscape.svg?style=flat)](https://landscape.io/github/rajatguptarg/beacons/master)
+[![Downloads](https://img.shields.io/github/downloads/rajatguptarg/beacons/total.svg?style=flat)](https://img.shields.io/github/downloads/rajatguptarg/beacons/total.svg)
 
 
 This is basic web application to manage your beacons.
