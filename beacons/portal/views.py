@@ -4,6 +4,9 @@ import flask
 import requests
 from oauth2client import client
 import json
+import config
+from beacons import Beacon
+from header import Header
 
 portal = Blueprint('portal', __name__)
 sess = Session()
@@ -21,12 +24,11 @@ def list_beacons():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
+        header = Header(credentials.access_token)
         auth_request = session.get(
-            'https://proximitybeacon.googleapis.com/v1beta1/beacons',
-            headers={
-                'Authorization': 'Bearer ' + credentials.access_token
-            }
+            config.LIST_BEACONS, headers=header.__str__()
         )
+
         return render_template(
             'beacons.jinja', beacons=json.loads(auth_request.content)
         )
@@ -36,7 +38,7 @@ def list_beacons():
 def oauth2callback():
     flow = client.flow_from_clientsecrets(
         'client_secrets.json',
-        scope='https://www.googleapis.com/auth/userlocation.beacon.registry',
+        scope=config.SCOPE,
         redirect_uri=flask.url_for('portal.oauth2callback', _external=True),
     )
 
@@ -71,37 +73,19 @@ def beacon_registration_status():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        advertised_id = request.form.get('advid')
-        status = request.form.get('status')
-        beacon_type = request.form.get('type')
+        beacon = Beacon(request.form.get('advid'))
+        beacon.status = request.form.get('status')
+        beacon.beacon_type = request.form.get('type')
 
-        request_body = {
-            "advertisedId": {
-                "type": beacon_type,
-                "id": advertised_id,
-            },
-            "status": status,
-        }
-
-        header = {
-            'Authorization': 'Bearer ' + credentials.access_token
-        }
-
+        request_body = beacon.registration_request_body()
+        header = Header(credentials.access_token)
         response = requests.post(
-            'https://proximitybeacon.googleapis.com/v1beta1/beacons:register',
-            data=json.dumps(request_body),
-            headers=header
+            config.REGISTER_BEACONS, data=json.dumps(request_body),
+            headers=header.__str__()
         )
 
-        if response.status_code == 400:
-            return render_template(
-                'registration_status.jinja',
-                status=json.loads(response.content)['error']
-            )
-
         return render_template(
-            'registration_status.jinja',
-            status=json.loads(response.content)['success']
+            'registration_status.jinja', status=json.loads(response.content)
         )
 
 
@@ -117,23 +101,10 @@ def beacon_unregistration_status():
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
         beacon_name = request.form.get('name')
+        header = Header(credentials.access_token)
+        url = config.BEACON + beacon_name + config.DEACTIVATE
+        response = requests.post(url, headers=header.__str__())
+        status = \
+            config.ERROR if response.status_code is 400 else config.SUCCESS
 
-        header = {
-            'Authorization': 'Bearer ' + credentials.access_token
-        }
-
-        url = 'https://proximitybeacon.googleapis.com/v1beta1/'
-        url += beacon_name + ':deactivate'
-
-        response = requests.post(url, headers=header)
-
-        if response.status_code == 400:
-            return render_template(
-                'unregistration_status.jinja',
-                status='ERROR'
-            )
-
-        return render_template(
-            'unregistration_status.jinja',
-            status='SUCCESS'
-        )
+        return render_template('unregistration_status.jinja', status=status)

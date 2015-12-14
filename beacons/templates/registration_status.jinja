@@ -3,7 +3,21 @@
 {% block title %} Status {% endblock %}
 
 {% block content%}
-    <strong>Code:</strong> {{ status.code }}<br>
-    <strong>Status:</strong> {{ status.status }}<br>
-    <strong>Message:</strong> {{ status.message }}<br>
+    {% for key in status%}
+        {% if key == 'error' %}
+            <strong>Code:</strong> {{ status[key]['code'] }}<br>
+            <strong>Status:</strong> {{ status[key]['status'] }}<br>
+            <strong>Message:</strong> {{ status[key]['message'] }}<br>
+        {% endif %}
+        {% if key == 'status' %}
+            <strong>Status:</strong> {{ status[key] }}<br>
+        {% endif %}
+        {% if key == 'advertisedId' %}
+            <strong>Beacon Type:</strong> {{ status[key]['type'] }}<br>
+            <strong>Advertised ID:</strong> {{ status[key]['id'] }}<br>
+        {% endif %}
+        {% if key == 'beaconName' %}
+            <strong>Beacon Name:</strong> {{ status[key] }}<br>
+        {% endif %}
+    {% endfor %}
 {% endblock %}
