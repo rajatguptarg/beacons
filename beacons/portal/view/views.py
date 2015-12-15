@@ -118,3 +118,49 @@ def edit_beacon_status():
         return render_template(
             'edit_beacon_status.jinja', status=status
         )
+
+@portal.route('/namespace', methods=['GET'])
+def beacon_namespace():
+    if 'credentials' not in flask.session:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    credentials = client.OAuth2Credentials.from_json(
+        flask.session['credentials']
+    )
+
+    if credentials.access_token_expired:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    else:
+        header = Header(credentials.access_token)
+        response = requests.get(config.ATTACHMENT, headers=header.__str__())
+        status = \
+            config.ERROR if response.status_code is 400 else config.SUCCESS
+	
+        return render_template('namespace_status.jinja', status=json.loads(response.content))
+
+
+@portal.route('/attachment-status', methods=['POST'])
+def beacon_attachment_status():
+    if credentials.access_token_expired:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    else:
+        form = BeaconName(request.form)
+        if request.method == 'POST' and form.validate():
+            request_body = Beacon.attachment_request_body(form)
+            header = Header(credentials.access_token)
+	        url = config.ATTACH_BEACONS + beacon.name + config.ATTACH
+            response = requests.post(
+                url, data=json.dumps(request_body),
+                headers=header.__str__()
+            )
+
+	        status = json.loads(response.content)
+
+            for key, value in status.iteritems():
+		      if(key == 'data'):
+                  ans = base64.b64decode(status[key])
+	    			
+            return render_template(
+		      'attachment_status.jinja',status = ans
+ 		    )
+
+        return render_template('attachment.jinja', form=form)
