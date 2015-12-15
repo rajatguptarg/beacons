@@ -76,6 +76,8 @@ def beacon_registration_status():
         beacon = Beacon(request.form.get('advid'))
         beacon.status = request.form.get('status')
         beacon.beacon_type = request.form.get('type')
+        import pdb
+        pdb.set_trace()
 
         request_body = beacon.registration_request_body()
         header = Header(credentials.access_token)

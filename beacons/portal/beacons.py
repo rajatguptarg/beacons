@@ -2,17 +2,21 @@ class Beacon(object):
     """
     Beacon Details
     """
-    def __init__(self, advertised_id):
+    def __init__(
+            self, advertised_id, beacon_type=None, status=None,
+            description=None, indoorlevel_name=None, lattitude=None,
+            longitude=None, expected_stability=None, position=None,
+            place_id=None):
         self.advertised_id = advertised_id
-        self.beacon_type = None
-        self.status = None
-        self.description = None
-        self.indoorlevel_name = None
-        self.lattitude = None
-        self.longitude = None
-        self.expected_stability = None
-        self.position = None
-        self.place_id = None
+        self.beacon_type = beacon_type
+        self.status = status
+        self.description = description
+        self.indoorlevel_name = indoorlevel_name
+        self.lattitude = lattitude
+        self.longitude = longitude
+        self.expected_stability = expected_stability
+        self.position = position
+        self.place_id = place_id
 
     def registration_request_body(self):
         """
