@@ -3,7 +3,6 @@
 {% block title %} Status {% endblock %}
 
 {% block content%}
-    {{ status }}
     {% for key in status%}
         {% if key == 'error' %}
             <strong>Code:</strong> {{ status[key]['code'] }}<br>

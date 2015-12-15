@@ -1,45 +1,45 @@
-class Beacon(object):
+from wtforms import Form, BooleanField, TextField, validators
+
+
+class Beacon(Form):
     """
     Beacon Details
     """
-    def __init__(
-            self, advertised_id, beacon_type=None, status=None,
-            description=None, indoorlevel_name=None, lattitude=None,
-            longitude=None, expected_stability=None, position=None,
-            place_id=None):
-        self.advertised_id = advertised_id
-        self.beacon_type = beacon_type
-        self.status = status
-        self.description = description
-        self.indoorlevel_name = indoorlevel_name
-        self.lattitude = lattitude
-        self.longitude = longitude
-        self.expected_stability = expected_stability
-        self.position = position
-        self.place_id = place_id
+    advertised_id = TextField('Advertised ID', [validators.Required()])
+    status = TextField('ACTIVE')
+    beacon_type = TextField('EDDYSTONE')
+    description = TextField('Description')
+    indoorlevel_name = TextField('Indoor Level Name')
+    lattitude = TextField('Lattitude')
+    longitude = TextField('Longitude')
+    expected_stability = TextField('Expected Stability')
+    position = TextField('Position')
+    place_id = TextField('Place Id')
+    accept_details = BooleanField('Are you sure!', [validators.Required()])
 
-    def registration_request_body(self):
+    @staticmethod
+    def registration_request_body(form):
         """
         Return the request body in json format
         """
         body = {
             "advertisedId": {
-                "type": self.beacon_type,
-                "id": self.advertised_id,
+                "type": form.beacon_type.data,
+                "id": form.advertised_id.data,
             },
-            "status": self.status,
-            "placeId": self.place_id,
+            "status": form.status.data,
+            "placeId": form.place_id.data,
             "latLng": {
-                "latitude": self.lattitude,
-                "longitude": self.longitude,
+                "latitude": form.lattitude.data,
+                "longitude": form.longitude.data,
             },
             "indoorLevel": {
-                "name": self.indoorlevel_name,
+                "name": form.indoorlevel_name.data,
             },
-            "expectedStability": self.expected_stability,
-            "description": self.description,
+            "expectedStability": form.expected_stability.data,
+            "description": form.description.data,
             "properties": {
-                "position": self.position,
+                "position": form.position.data,
             }
         }
         return body

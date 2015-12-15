@@ -1,4 +1,5 @@
 {% extends "base.jinja" %}
+{% from "_formhelpers.jinja" import render_field %}
 
 {% block title %}
     Register
@@ -12,79 +13,81 @@
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-          <form class="form-horizontal" action="{{ url_for('portal.beacon_registration_status') }}" method="post">
+          <form class="form-horizontal" action="{{ url_for('portal.register_beacons') }}" method="post">
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Advertised ID:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="advid" placeholder="Enter Advertised Id of beacon">
+                        {{ render_field(form.advertised_id) }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-xs-3">Status:</label>
                     <div class="col-xs-5">
-                        <select class="form-control" name="status">
-                            <option>ACTIVE</option>
-                        </select>
+                        {{ render_field(form.status) }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-xs-3">Type:</label>
                     <div class="col-xs-5">
-                        <select class="form-control" name="type">
-                            <option>EDDYSTONE</option>
-                            <option>iBEACON</option>
-                        </select>
+                        {{ render_field(form.beacon_type) }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Description:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="description" placeholder="Rajat da Dhaba">
+                        {{ render_field(form.description) }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Indoor Level Name:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="indoorlevel_name" placeholder="1">
+                        {{ render_field(form.indoorlevel_name) }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Lattitude:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="lattitude" placeholder="47.6693771">
+                        {{ render_field(form.lattitude) }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Longitude:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="longitude" placeholder="-122.1966037">
+                        {{ render_field(form.longitude) }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Expected Stability:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="expected_stability" placeholder="STABLE">
+                        {{ render_field(form.expected_stability) }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Position:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="position" placeholder="STABLE">
+                        {{ render_field(form.position) }}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Place ID:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="place_id" placeholder="ChIJTxax6NoSkFQRWPvFXI1LypQ">
+                        {{ render_field(form.place_id) }}
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="name">Accept Details:</label>
+                    <div class="col-xs-7">
+                        {{ render_field(form.accept_details) }}
                     </div>
                 </div>
 
