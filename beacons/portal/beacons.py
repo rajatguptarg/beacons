@@ -1,41 +1,45 @@
-class Beacon(object):
+from wtforms import Form, BooleanField, TextField, validators
+
+
+class Beacon(Form):
     """
     Beacon Details
     """
-    def __init__(self, advertised_id):
-        self.advertised_id = advertised_id
-        self.beacon_type = None
-        self.status = None
-        self.description = None
-        self.indoorlevel_name = None
-        self.lattitude = None
-        self.longitude = None
-        self.expected_stability = None
-        self.position = None
-        self.place_id = None
+    advertised_id = TextField('Advertised ID', [validators.Required()])
+    status = TextField('ACTIVE')
+    beacon_type = TextField('EDDYSTONE')
+    description = TextField('Description')
+    indoorlevel_name = TextField('Indoor Level Name')
+    lattitude = TextField('Lattitude')
+    longitude = TextField('Longitude')
+    expected_stability = TextField('Expected Stability')
+    position = TextField('Position')
+    place_id = TextField('Place Id')
+    accept_details = BooleanField('Are you sure!', [validators.Required()])
 
-    def registration_request_body(self):
+    @staticmethod
+    def registration_request_body(form):
         """
         Return the request body in json format
         """
         body = {
             "advertisedId": {
-                "type": self.beacon_type,
-                "id": self.advertised_id,
+                "type": form.beacon_type.data,
+                "id": form.advertised_id.data,
             },
-            "status": self.status,
-            "placeId": self.place_id,
+            "status": form.status.data,
+            "placeId": form.place_id.data,
             "latLng": {
-                "latitude": self.lattitude,
-                "longitude": self.longitude,
+                "latitude": form.lattitude.data,
+                "longitude": form.longitude.data,
             },
             "indoorLevel": {
-                "name": self.indoorlevel_name,
+                "name": form.indoorlevel_name.data,
             },
-            "expectedStability": self.expected_stability,
-            "description": self.description,
+            "expectedStability": form.expected_stability.data,
+            "description": form.description.data,
             "properties": {
-                "position": self.position,
+                "position": form.position.data,
             }
         }
         return body
