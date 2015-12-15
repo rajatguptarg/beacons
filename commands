@@ -1,0 +1,43 @@
+    1  vi ~/.zshrc
+    2  mkdir Devel
+    3  ls
+    4  cd Devel
+    5  ls
+    6  ..
+    7  source ~/.zshrc
+    8  mkproject beacons
+    9  git clone git@github.com:ParulThoughtworks/beacons.git
+   10  cd beacons
+   11  ls
+   12  git checkout develop
+   13  git pull origin --rebase
+   14  git pull origin --rebase develop
+   15  git pull --rebase origin develop:develop
+   16  git pull --rebase origin master:master
+   17  pip install -r re
+   18  pip install -r requirements.txt
+   19  vi requirements.txt
+   20  pip install -r requirements.txt
+   21  grh
+   22  git reset --hard
+   23  git log
+   24  tox
+   25  vi requirements.txt
+   26  tix
+   27  tox
+   28  coverage run setup.py test
+   29  coverage report
+   30  python setup.py test
+   31  git reset --hard
+   32  ls
+   33  ./run.py
+   34  ls
+   35  python setup.py build
+   36  sudo python setup.py install
+   37  ls
+   38  ./run.py
+   39  ls
+   40  cp $HOME/Beacons/beacons/client_secrets.json ./
+   41  ls
+   42  ./run.py
+   43  history

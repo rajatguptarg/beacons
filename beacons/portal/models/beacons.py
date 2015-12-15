@@ -14,6 +14,8 @@ class Beacon(object):
         self.expected_stability = form.get('expected_stability')
         self.position = form.get('position')
         self.place_id = form.get('place_id')
+        self.msg = form.get('msg')
+        self.namespace = "proximity"
 
     def registration_request_body(self):
         """
@@ -41,6 +43,7 @@ class Beacon(object):
         }
         return body
 
+
     def update_request_body(self):
         """
         Return request body to update beacon
@@ -55,5 +58,15 @@ class Beacon(object):
             "properties": {
                 "position": self.position,
             }
+        }
+        return body    
+
+    def attachment_request_body(self):
+        """
+        Return the request body in json format
+        """
+        body = {
+            "namespacedType": self.namespaces,
+            "data": (self.msg).encode('base64', 'strict')
         }
         return body
