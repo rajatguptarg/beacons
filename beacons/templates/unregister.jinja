@@ -1,5 +1,4 @@
 {% extends "base.jinja" %}
-{% from "_formhelpers.jinja" import render_field %}
 
 {% block title %}
     Unregister
@@ -17,14 +16,7 @@
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Beacon Name:</label>
                     <div class="col-xs-7">
-                        {{ render_field(form.beacon_name) }}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-xs-3" for="name">Are you sure? </label>
-                    <div class="col-xs-7">
-                        {{ render_field(form.accept_details) }}
+                        <input type="text" class="form-control" name="name" placeholder="Enter name of beacon">
                     </div>
                 </div>
 
