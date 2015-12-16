@@ -1,5 +1,5 @@
 from flask import Flask
-from beacons.portal.views import portal
+from beacons.portal.view import portal
 
 app = Flask(__name__)
 
