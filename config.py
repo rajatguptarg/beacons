@@ -1,6 +1,7 @@
 # List of all the URLs
 
-LIST_BEACONS = 'https://proximitybeacon.googleapis.com/v1beta1/beacons'
+LIST_BEACONS = \
+    'https://proximitybeacon.googleapis.com/v1beta1/beacons?pageSize=20'
 
 SCOPE = 'https://www.googleapis.com/auth/userlocation.beacon.registry'
 

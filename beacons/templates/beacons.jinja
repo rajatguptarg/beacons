@@ -30,8 +30,8 @@
 </div>
 
 <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
         <table class="table table-bordered" align="center">
             <tr class="active">
                 <th class="info">Sno.</th>
@@ -39,6 +39,12 @@
                 <th class="info" class="info" class="info" class="info">Type</th>
                 <th class="info" class="info" class="info">Advertised ID</th>
                 <th class="info" class="info">Status</th>
+                <th class="info" class="info">Description</th>
+                <th class="info" class="info">Position</th>
+                <th class="info" class="info">Indoor Level Name</th>
+                <th class="info" class="info">Latitude</th>
+                <th class="info" class="info">Longitude</th>
+                <th class="info" class="info">Expected Stability</th>
             </tr>
             {% for beacon in beacons.beacons %}
                 <tr class="active">
@@ -47,11 +53,33 @@
                     <td class="active">{{ beacon.advertisedId.type }}</td>
                     <td class="active">{{ beacon.advertisedId.id }}</td>
                     <td class="active">{{ beacon.status }}</td>
+                    <td class="active">{{ beacon.description }}</td>
+                    {% if beacon.properties %}
+                        <td class="active">{{ beacon.properties.position }}</td>
+                    {% else %}
+                        <td class="active"></td>
+                    {% endif %}
+                    {% if beacon.indoorLevel %}
+                        <td class="active">{{ beacon.indoorLevel.name }}</td>
+                    {% else %}
+                        <td class="active"></td>
+                    {% endif %}
+                    {% if beacon.latLng %}
+                        <td class="active">{{ beacon.latLng.latitude }}</td>
+                        <td class="active">{{ beacon.latLng.longitude }}</td>
+                    {% else %}
+                        <td class="active"></td>
+                    {% endif %}
+                    {% if beacon.expectedStability %}
+                        <td class="active">{{ beacon.expectedStability }}</td>
+                    {% else %}
+                        <td class="active"></td>
+                    {% endif %}
                 </tr>
             {% endfor %}
             <br>
         </table>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-1"></div>
 </div>
 {% endblock %}
