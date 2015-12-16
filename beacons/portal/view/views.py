@@ -4,9 +4,7 @@ import requests
 from oauth2client import client
 import json
 from config import SUCCESS, ERROR, LIST_BEACONS, SCOPE, REGISTER_BEACONS
-from beacons import Beacon
-from header import Header
-from beacon_name import BeaconName
+from beacons.portal.models import Beacon, Header, BeaconName
 
 portal = Blueprint('portal', __name__)
 session = requests.Session()
