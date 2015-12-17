@@ -5,13 +5,11 @@ from oauth2client import client
 import json
 from config import LIST_BEACONS, SCOPE
 from beacons.portal.controller import controller
-from beacons.portal.helper import BeaconHelper
 from beacons.portal.models import Beacon, BeaconName, Header
 
 
 portal = Blueprint('portal', __name__)
 session = requests.Session()
-beacon_helper = BeaconHelper()
 
 
 @portal.route('/')
