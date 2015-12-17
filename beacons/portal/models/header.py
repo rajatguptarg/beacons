@@ -2,9 +2,7 @@ class Header(object):
     """
     OAuth2.0 Header Details
     """
-    access_token = ''
-
-    def get_header(self):
+    def get_header_body(self):
         """
         Returns the header of the request
         """
@@ -17,4 +15,4 @@ class Header(object):
         self.access_token = access_token
 
     def __str__(self):
-        return self.get_header()
+        return self.get_header_body()
