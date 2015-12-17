@@ -1,45 +1,42 @@
-from wtforms import Form, BooleanField, TextField, validators
-
-
-class Beacon(Form):
+# pylint: disable-msg=too-many-arguments
+class Beacon(object):
     """
     Beacon Details
     """
-    advertised_id = TextField('Advertised ID', [validators.Required()])
-    status = TextField('ACTIVE')
-    beacon_type = TextField('EDDYSTONE')
-    description = TextField('Description')
-    indoorlevel_name = TextField('Indoor Level Name')
-    lattitude = TextField('Lattitude')
-    longitude = TextField('Longitude')
-    expected_stability = TextField('Expected Stability')
-    position = TextField('Position')
-    place_id = TextField('Place Id')
-    accept_details = BooleanField('Are you sure!', [validators.Required()])
+    def __init__(self, form):
+        self.advertised_id = form.get('advid')
+        self.beacon_type = form.get('type')
+        self.status = form.get('status')
+        self.description = form.get('description')
+        self.indoorlevel_name = form.get('indoorlevel_name')
+        self.latitude = form.get('latitude')
+        self.longitude = form.get('longitude')
+        self.expected_stability = form.get('expected_stability')
+        self.position = form.get('position')
+        self.place_id = form.get('place_id')
 
-    @staticmethod
-    def registration_request_body(form):
+    def registration_request_body(self):
         """
         Return the request body in json format
         """
         body = {
             "advertisedId": {
-                "type": form.beacon_type.data,
-                "id": form.advertised_id.data,
+                "type": self.beacon_type,
+                "id": self.advertised_id,
             },
-            "status": form.status.data,
-            "placeId": form.place_id.data,
+            "status": self.status,
+            "placeId": self.place_id,
             "latLng": {
-                "latitude": form.lattitude.data,
-                "longitude": form.longitude.data,
+                "latitude": self.latitude,
+                "longitude": self.longitude,
             },
             "indoorLevel": {
-                "name": form.indoorlevel_name.data,
+                "name": self.indoorlevel_name,
             },
-            "expectedStability": form.expected_stability.data,
-            "description": form.description.data,
+            "expectedStability": self.expected_stability,
+            "description": self.description,
             "properties": {
-                "position": form.position.data,
+                "position": self.position,
             }
         }
         return body

@@ -1,5 +1,4 @@
 {% extends "base.jinja" %}
-{% from "_formhelpers.jinja" import render_field %}
 
 {% block title %}
     Unregister
@@ -13,18 +12,11 @@
     <div class="row">
         <div class="col-md-4"></div>
         <div class="col-md-4">
-          <form class="form-horizontal" action="{{ url_for('portal.unregister_beacons') }}" method="post">
+          <form class="form-horizontal" action="{{ url_for('portal.unregister_beacons_status') }}" method="post">
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Beacon Name:</label>
                     <div class="col-xs-7">
-                        {{ render_field(form.beacon_name) }}
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-xs-3" for="name">Are you sure? </label>
-                    <div class="col-xs-7">
-                        {{ render_field(form.accept_details) }}
+                        <input type="text" class="form-control" name="name" placeholder="Enter name of beacon">
                     </div>
                 </div>
 

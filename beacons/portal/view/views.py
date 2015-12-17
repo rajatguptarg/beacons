@@ -3,8 +3,10 @@ import flask
 import requests
 from oauth2client import client
 import json
-from config import SUCCESS, ERROR, LIST_BEACONS, SCOPE, REGISTER_BEACONS
-from beacons.portal.models import Beacon, Header, BeaconName
+from config import LIST_BEACONS, SCOPE
+from beacons.portal.controller import controller
+from beacons.portal.models import Beacon, BeaconName, Header
+
 
 portal = Blueprint('portal', __name__)
 session = requests.Session()
@@ -21,9 +23,8 @@ def list_beacons():
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
         header = Header(credentials.access_token)
-        auth_request = session.get(
-            LIST_BEACONS, headers=header.__str__()
-        )
+        auth_request = session.get(LIST_BEACONS,
+            headers=header.get_header_body())
 
         return render_template(
             'beacons.jinja', beacons=json.loads(auth_request.content)
@@ -48,34 +49,35 @@ def oauth2callback():
         return flask.redirect(flask.url_for('portal.list_beacons'))
 
 
-@portal.route('/register', methods=['GET', 'POST'])
+@portal.route('/register', methods=['GET'])
 def register_beacons():
+    return render_template('register.jinja')
+
+
+@portal.route('/register', methods=['POST'])
+def register_beacons_status():
     if 'credentials' not in flask.session:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     credentials = client.OAuth2Credentials.from_json(
         flask.session['credentials']
     )
-
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        form = Beacon(request.form)
-        if request.method == 'POST' and form.validate():
-            request_body = Beacon.registration_request_body(form)
-            header = Header(credentials.access_token)
-            response = requests.post(
-                REGISTER_BEACONS, data=json.dumps(request_body),
-                headers=header.__str__()
-            )
-            return render_template('registration_status.jinja',
-                status=json.loads(response.content)
-            )
-
-        return render_template('register.jinja', form=form)
+        beacon = Beacon(request.form)
+        data = controller.register_beacon(beacon, credentials)
+        return render_template('registration_status.jinja',
+            status=json.loads(data)
+        )
 
 
-@portal.route('/unregister', methods=['GET', 'POST'])
+@portal.route('/unregister', methods=['GET'])
 def unregister_beacons():
+    return render_template('unregister.jinja')
+
+
+@portal.route('/unregister', methods=['POST'])
+def unregister_beacons_status():
     if 'credentials' not in flask.session:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     credentials = client.OAuth2Credentials.from_json(
@@ -84,15 +86,9 @@ def unregister_beacons():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        form = BeaconName(request.form)
-        if request.method == 'POST' and form.validate():
-            header = Header(credentials.access_token)
-            url = BeaconName.get_deactivation_url(form)
-            response = requests.post(url, headers=header.__str__())
-            status = ERROR if response.status_code is 400 else SUCCESS
-
-            return render_template(
-                'unregistration_status.jinja', status=status
-            )
-
-        return render_template('unregister.jinja', form=form)
+        beacon_details = BeaconName(request.form)
+        status = controller.deactivate_beacon(beacon_details, credentials)
+        # TODO: Make proper status based upon respnse
+        return render_template(
+            'unregistration_status.jinja', status=status
+        )
