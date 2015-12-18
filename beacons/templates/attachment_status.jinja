@@ -2,18 +2,18 @@
 
 {% block title %} Status {% endblock %}
    
-{% block content%}
-  {{ status }}
+{% block content %}
+  {% for key in status1%}
+        <strong>{{key}} : </strong> {{status1[key]}} <br>
+  {% endfor %}      
+
   {% for key in status%}
-        {% if key == 'data' %}
-            <strong>Data:</strong> {{ status[key] }}<br>
-        {% endif %}
         {% if key == 'attachmentName' %}
             <strong>Attachment Name:</strong> {{ status[key] }}<br>
         {% endif %}
         {% if key == 'namespacedType' %}
             <strong>Namespace:</strong> {{ status[key] }}<br>
         {% endif %}
-  {% endfor %}	
+  {% endfor %}  
 
 {% endblock %}
