@@ -166,6 +166,5 @@ def beacon_attachment_status():
         finalans = json.loads(ans)
         return render_template(
             'attachment_status.jinja',
-             status1=finalans,
-             status=json.loads(status)
+             status1=finalans, status=json.loads(status)
         )
