@@ -4,10 +4,10 @@ import flask
 import requests
 from oauth2client import client
 import json
+import base64
 from config import LIST_BEACONS, SCOPE, ATTACHMENT
 from beacons.portal.controller import controller
 from beacons.portal.models import Beacon, Header
-from beacons.portal.models import Beacon, BeaconName, Header
 
 portal = Blueprint('portal', __name__)
 session = requests.Session()
@@ -32,7 +32,6 @@ def list_beacons():
             'beacons.jinja', beacons=json.loads(auth_request.content)
         )
 
-
 @portal.route('/oauth2callback')
 def oauth2callback():
     flow = client.flow_from_clientsecrets(
@@ -50,9 +49,6 @@ def oauth2callback():
         flask.session['credentials'] = credentials.to_json()
         return flask.redirect(flask.url_for('portal.list_beacons'))
 
-@portal.route('/attachment')
-def attachment_beacons():
-    return render_template('attachment.jinja')
 
 @portal.route('/register', methods=['GET'])
 def register_beacons():
@@ -145,35 +141,30 @@ def beacon_namespace():
             'namespace_status.jinja', status=json.loads(response.content)
         )
 
+@portal.route('/attachment')
+def attachment_beacons():
+    return render_template('attachment.jinja')
+
 
 @portal.route('/attachment-status', methods=['POST'])
 def beacon_attachment_status():
+    if 'credentials' not in flask.session:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    credentials = client.OAuth2Credentials.from_json(
+        flask.session['credentials']
+    )
+
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = Beacon(request.form.get('advid'))
-        beacon.name = request.form.get('name')
-        beacon.msg = request.form.get('msg')
-
-        try:
-            json_object = json.loads(beacon.msg)
-        except ValueError, e:
-            flash('Invalid Input')
-
-        request_body = beacon.attachment_request_body()
-        header = Header(credentials.access_token)
-        url = config.ATTACH_BEACONS + beacon.name + config.ATTACH
-        response = requests.post(
-            url, data=(json.dumps(request_body)),
-            headers=header.__str__()
-            )
-        status1 = json.loads(response.content)
+        beacon = Beacon(request.form)
+        status = controller.attachdatato_beacon(beacon,credentials)
+        
+        status1 = json.loads(status)
         for key, value in status1.iteritems():
             if(key == 'data'):
                 ans = base64.b64decode(status1[key])
                 finalans = json.loads(ans)
         return render_template(
-            'attachment_status.jinja', status1=finalans,
-            status=json.loads(response.content)
+            'attachment_status.jinja',status1=finalans, status=json.loads(status)
         )
-
