@@ -31,7 +31,7 @@
 
 <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-10">
+    <div class="col-md-11">
         <table class="table table-bordered" align="center">
             <tr class="active">
                 <th class="info">Sno.</th>
@@ -75,11 +75,24 @@
                     {% else %}
                         <td class="active"></td>
                     {% endif %}
+                    <td class="active">
+                    <form class="form-horizontal" action="{{ url_for('.edit_beacon') }}" method="post">
+                        <div class="form-group">
+                            <div class="col-xs-offset-4 col-xs-8">
+                                <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
+                                <input type="hidden" class="form-control" name="advid" value={{ beacon.advertisedId.id }}>
+                    <td class="active">
+
+                                <input type="submit" class="btn btn-success" value="Edit">
+                            </div>
+                        </div>
+                    </form>
+                </td>
                 </tr>
             {% endfor %}
             <br>
         </table>
     </div>
-    <div class="col-md-1"></div>
+
 </div>
 {% endblock %}

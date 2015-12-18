@@ -29,3 +29,15 @@ def deactivate_beacon(beacon_details, credentials):
     response = requests.post(url, headers=header.get_header_body())
     status = ERROR if response.status_code is 400 else SUCCESS
     return status
+
+
+def modify_beacon(beacon, credentials):
+    """
+    Modify the details of existing beacons
+    """
+    header = Header(credentials.access_token)
+    request_body = beacon.update_request_body()
+    url = url_builder.beacon_modification_url(beacon)
+    response = requests.put(url, data=json.dumps(request_body),
+        headers=header.get_header_body())
+    return response.content
