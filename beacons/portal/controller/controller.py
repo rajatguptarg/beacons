@@ -31,9 +31,9 @@ def deactivate_beacon(beacon_details, credentials):
     return status
 
 
-def attachdatato_beacon(beacon_details, credentials):
+def attach_data_to_beacon(beacon_details, credentials):
     """
-    Retun the response
+    Attaches data to beacon
     """
     request_body = beacon_details.attachment_request_body()
     header = Header(credentials.access_token)

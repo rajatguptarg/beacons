@@ -1,5 +1,4 @@
-from flask import Blueprint, flash, render_template, request
-from flask.ext.session import Session
+from flask import Blueprint, render_template, request
 import flask
 import requests
 from oauth2client import client
@@ -31,6 +30,7 @@ def list_beacons():
         return render_template(
             'beacons.jinja', beacons=json.loads(auth_request.content)
         )
+
 
 @portal.route('/oauth2callback')
 def oauth2callback():
@@ -122,6 +122,7 @@ def edit_beacon_status():
             'edit_beacon_status.jinja', status=status
         )
 
+
 @portal.route('/namespace', methods=['GET'])
 def beacon_namespace():
     if 'credentials' not in flask.session:
@@ -141,6 +142,7 @@ def beacon_namespace():
             'namespace_status.jinja', status=json.loads(response.content)
         )
 
+
 @portal.route('/attachment')
 def attachment_beacons():
     return render_template('attachment.jinja')
@@ -158,13 +160,12 @@ def beacon_attachment_status():
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
         beacon = Beacon(request.form)
-        status = controller.attachdatato_beacon(beacon,credentials)
-        
-        status1 = json.loads(status)
-        for key, value in status1.iteritems():
-            if(key == 'data'):
-                ans = base64.b64decode(status1[key])
-                finalans = json.loads(ans)
+        status = controller.attach_data_to_beacon(beacon, credentials)
+
+        ans = base64.b64decode((json.loads(status))['data'])
+        finalans = json.loads(ans)
         return render_template(
-            'attachment_status.jinja',status1=finalans, status=json.loads(status)
+            'attachment_status.jinja',
+             status1=finalans,
+             status=json.loads(status)
         )

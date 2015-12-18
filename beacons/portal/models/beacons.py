@@ -43,7 +43,6 @@ class Beacon(object):
         }
         return body
 
-
     def update_request_body(self):
         """
         Return request body to update beacon
@@ -59,7 +58,7 @@ class Beacon(object):
                 "position": self.position,
             }
         }
-        return body    
+        return body
 
     def attachment_request_body(self):
         """
