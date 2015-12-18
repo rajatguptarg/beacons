@@ -15,7 +15,7 @@ class Beacon(object):
         self.position = form.get('position')
         self.place_id = form.get('place_id')
         self.msg = form.get('msg')
-        self.namespace = "proximity"
+        self.namespace = "proximity-test-1146"
 
     def registration_request_body(self):
         """

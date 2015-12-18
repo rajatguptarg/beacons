@@ -7,6 +7,7 @@ import json
 from config import LIST_BEACONS, SCOPE, ATTACHMENT
 from beacons.portal.controller import controller
 from beacons.portal.models import Beacon, Header
+from beacons.portal.models import Beacon, BeaconName, Header
 
 portal = Blueprint('portal', __name__)
 session = requests.Session()
@@ -56,7 +57,6 @@ def attachment_beacons():
 @portal.route('/register', methods=['GET'])
 def register_beacons():
     return render_template('register.jinja')
-
 
 
 @portal.route('/register', methods=['POST'])
@@ -120,6 +120,7 @@ def edit_beacon_status():
     else:
         beacon_details = Beacon(request.form)
         status = controller.modify_beacon(beacon_details, credentials)
+
         # TODO: Make proper status based upon respnse
         return render_template(
             'edit_beacon_status.jinja', status=status
@@ -174,4 +175,5 @@ def beacon_attachment_status():
         return render_template(
             'attachment_status.jinja', status1=finalans,
             status=json.loads(response.content)
-            )
+        )
+
