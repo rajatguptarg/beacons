@@ -1,9 +1,9 @@
-# pylint: disable-msg=too-many-arguments
 class Beacon(object):
     """
     Beacon Details
     """
     def __init__(self, form):
+        self.beacon_name = form.get('name')
         self.advertised_id = form.get('advid')
         self.beacon_type = form.get('type')
         self.status = form.get('status')
@@ -34,6 +34,23 @@ class Beacon(object):
                 "name": self.indoorlevel_name,
             },
             "expectedStability": self.expected_stability,
+            "description": self.description,
+            "properties": {
+                "position": self.position,
+            }
+        }
+        return body
+
+    def update_request_body(self):
+        """
+        Return request body to update beacon
+        """
+        body = {
+            "beaconName": self.beacon_name,
+            "placeId": self.place_id,
+            "indoorLevel": {
+                "name": self.indoorlevel_name,
+            },
             "description": self.description,
             "properties": {
                 "position": self.position,
