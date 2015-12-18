@@ -1,0 +1,983 @@
+    1  vi ~/.zshrc
+    2  mkdir Devel
+    3  ls
+    4  cd Devel
+    5  ls
+    6  ..
+    7  source ~/.zshrc
+    8  mkproject beacons
+    9  git clone git@github.com:ParulThoughtworks/beacons.git
+   10  cd beacons
+   11  ls
+   12  git checkout develop
+   13  git pull origin --rebase
+   14  git pull origin --rebase develop
+   15  git pull --rebase origin develop:develop
+   16  git pull --rebase origin master:master
+   17  pip install -r re
+   18  pip install -r requirements.txt
+   19  vi requirements.txt
+   20  pip install -r requirements.txt
+   21  grh
+   22  git reset --hard
+   23  git log
+   24  tox
+   25  vi requirements.txt
+   26  tix
+   27  tox
+   28  coverage run setup.py test
+   29  coverage report
+   30  python setup.py test
+   31  git reset --hard
+   32  ls
+   33  ./run.py
+   34  ls
+   35  python setup.py build
+   36  sudo python setup.py install
+   37  ls
+   38  ./run.py
+   39  ls
+   40  cp $HOME/Beacons/beacons/client_secrets.json ./
+   41  ls
+   42  ./run.py
+   43  history
+   44  history >> commands
+   45  vi commands
+   46  ls
+   47  cd Devel
+   48  ls
+   49  cd beacons
+   50  git checkout develop
+   51  cd ..
+   52  ls
+   53  git clone git@github.com:ParulThoughtworks/beacons.git
+   54  cd beacons
+   55  ls
+   56  cd beacons
+   57  ls
+   58  git pull origin --rebase
+   59  git pull --rebase origin develop:develop
+   60  git pull --rebase origin master:master
+   61  tox
+   62  pip install -r requirements.txt
+   63  clear
+   64  git branch
+   65  ls
+   66  cd beacons
+   67  ls
+   68  cd portal
+   69  ls
+   70  cd ..
+   71  ls
+   72  cd ..
+   73  ls
+   74  vi config.py
+   75  ls
+   76  cd beacons
+   77  ls
+   78  cd portal
+   79  ls
+   80  vi controller.py
+   81  ls
+   82  vi beacons.py
+   83  vi views.py
+   84  ls
+   85  vi views.py
+   86  ls
+   87  cd ..
+   88  ls
+   89  cd templates
+   90  ls
+   91  vi base.jinja
+   92  vi beacons.jinja
+   93  ls
+   94  vi unregistration_status.jinja
+   95  vi namespace_status.jinja
+   96  vi unregistration_status.jinja
+   97  vi namespace_status.jinja
+   98  ls
+   99  cd ..
+  100  ls
+  101  cd ..
+  102  ls
+  103  ./run.py
+  104  ls
+  105  ./run.py
+  106  cd ../..
+  107  ls
+  108  cd beacons
+  109  ls
+  110  cd beacons
+  111  ls
+  112  ./run.py
+  113  ls
+  114  cd beacons/portal
+  115  vi beacons.py
+  116  ls
+  117  cd ..
+  118  ls
+  119  cd ..
+  120  ls
+  121  ./run.py
+  122  ls
+  123  cd beacons
+  124  ls
+  125  cd portal
+  126  cd ..
+  127  ls
+  128  cd templates
+  129  ls
+  130  vi registration_status.jinja
+  131  ls
+  132  cd ..
+  133  ls
+  134  cd portal
+  135  ls
+  136  vi views.py
+  137  ls
+  138  cd ../..
+  139  ls
+  140  ./run.py
+  141  ls
+  142  cd beacons
+  143  ls
+  144  cd portal
+  145  ls
+  146  vi views.py
+  147  ls
+  148  cd ..
+  149  ls
+  150  cd ..
+  151  ls
+  152  ./run.py
+  153  ls
+  154  cd beacons/portal
+  155  ls
+  156  vi views.py
+  157  ls
+  158  cd ../..
+  159  ls
+  160  ./run.py
+  161  cd beacons/portal
+  162  vi views.py
+  163  cd ../..
+  164  ./run.py
+  165  ls
+  166  cd beacons/portal
+  167  ls
+  168  vi views.py
+  169  ls
+  170  cd ../..
+  171  ./run.py
+  172  ls
+  173  vi beacons/portal/views.py
+  174  ./run.py
+  175  ls
+  176  vi beacons/portal/views.py
+  177  ./run.py
+  178  ls
+  179  cd beacons/templates
+  180  ls
+  181  vi registration_status.jinja
+  182  ls
+  183  vi namespace_status.jinja
+  184  ls
+  185  cd ..
+  186  ls
+  187  cd portal
+  188  ls
+  189  vi views.py
+  190  ls
+  191  cd ..
+  192  ls
+  193  cd ..
+  194  ls
+  195  ./run.py
+  196  ls
+  197  cd Devel/beacons
+  198  ls
+  199  cd beacons
+  200  ls
+  201  cd beacons/templates
+  202  ls
+  203  vi registration_status.jinja
+  204  ls
+  205  cd beacons/templates
+  206  vi namespace_status.jinja
+  207  ls
+  208  cd ../..
+  209  ./run.py
+  210  ls
+  211  cd beacons/templates
+  212  ls
+  213  vi namespace_status.jinja
+  214  ls
+  215  cd ..
+  216  ls
+  217  cd portal
+  218  ls
+  219  vi views.py
+  220  ls
+  221  cd ../..
+  222  ls
+  223  ./run.py
+  224  ls
+  225  vi register.jinja
+  226  ls
+  227  vi unregistration_status.jinja
+  228  vi registration_status.jinja
+  229  ls
+  230  cd beacons/templates
+  231  ls
+  232  vi namespace_status.jinja
+  233  ls
+  234  cd ..
+  235  ls
+  236  cd portal
+  237  ls
+  238  vi views.py
+  239  ls
+  240  cd ..
+  241  ls
+  242  cd portal
+  243  ls
+  244  vi views.py
+  245  ls
+  246  cd ../..
+  247  ls
+  248  ./run.py
+  249  ls
+  250  cd Devel/beacons/beacons/beacons/templates
+  251  ls
+  252  vi registration_status.jinja
+  253  cd beacons
+  254  ls
+  255  cd templates
+  256  ls
+  257  vi namespace_status.jinja
+  258  ls
+  259  cd ..
+  260  ls
+  261  cd portal
+  262  ls
+  263  vi views.py
+  264  ls
+  265  cd ..
+  266  ls
+  267  cd portal
+  268  ls
+  269  vi views.py
+  270  ls
+  271  cd ../..
+  272  ls
+  273  vi co
+  274  ls
+  275  rm -rf co
+  276  ls
+  277  vi config.py
+  278  ls
+  279  cd beacons/portal
+  280  vi views.py
+  281  ls
+  282  vi beacons.py
+  283  ls
+  284  cd ..
+  285  ls
+  286  cd templates
+  287  ls
+  288  vi beacons.jinja
+  289  ls
+  290  vi unregister.jinja
+  291  vi attachment.jinja
+  292  vi base.jinja
+  293  cd Devel/beacons/beacons/beacons/portal
+  294  vi views.py
+  295  vi unregister.jinja
+  296  ls
+  297  vi attachment.jinja
+  298  ls
+  299  cd ..
+  300  l
+  301  ls
+  302  cd portal
+  303  ls
+  304  vi views.py
+  305  cd ..
+  306  dc templates
+  307  ls
+  308  cd templates
+  309  ls
+  310  vi base.jinja
+  311  ls
+  312  vi beacons.jinja
+  313  ls
+  314  cd ..
+  315  ls
+  316  cd ..
+  317  ls
+  318  ./run.py
+  319  ls
+  320  cd beacons/portal
+  321  ls
+  322  vi beacons.py
+  323  vi views.py
+  324  ls
+  325  cd ../..
+  326  ls
+  327  ./run.py
+  328  ls
+  329  cd beacons/portal
+  330  ls
+  331  vi beacons.py
+  332  ls
+  333  cd ..
+  334  ls
+  335  cd ..
+  336  ls
+  337  ./run.py
+  338  ls
+  339  vi beacons/portal/views.py
+  340  vi beacons/templates/attachment.jinja
+  341  ./run.py
+  342  ls
+  343  cd beacons/portal
+  344  ls
+  345  vi views.py
+  346  ls
+  347  cd ..
+  348  ls
+  349  cd templates
+  350  ls
+  351  vi attachment_status.jinja
+  352  ls
+  353  vi namespace_status.jinja
+  354  ls
+  355  vi attachment_status.jinja
+  356  ls
+  357  cd ..
+  358  ls
+  359  cd ..
+  360  ls
+  361  ./run.py
+  362  ls
+  363  vi config.py
+  364  ls
+  365  vi beacons/portal/views.py
+  366  cd Devel/beacons/beacons/beacons/portal/
+  367  vi views.py
+  368  ls
+  369  cd ../..
+  370  ls
+  371  cd beacons
+  372  ls
+  373  cd beacons
+  374  ls
+  375  ./run.py
+  376  ls
+  377  ./run.py
+  378  ls
+  379  vi beacons/portal/views.py
+  380  ./run.py
+  381  ls
+  382  v beacons/portal/views.py
+  383  vi beacons/templates/attachment.jinja
+  384  ls
+  385  ./run.py
+  386  ls
+  387  cd beacons/portal
+  388  vi beacons.py
+  389  ls
+  390  vi views.py
+  391  ls
+  392  cd ..
+  393  ls
+  394  cd ..
+  395  ls
+  396  ./run.py
+  397  ls
+  398  cd beacons
+  399  ls
+  400  cd portal
+  401  ls
+  402  vi views.py
+  403  ls
+  404  cd ../..
+  405  ls
+  406  ./run.py
+  407  ls
+  408  cd beacons/portal
+  409  ls
+  410  vi beacons.py
+  411  ls
+  412  vi views.py
+  413  ls
+  414  cd ..
+  415  ls
+  416  cd templates
+  417  ls
+  418  vi attachment.jinja
+  419  vi register.jinja
+  420  ls
+  421  vi attachment.jinja
+  422  ls
+  423  cd ..
+  424  ls
+  425  cd ..
+  426  ./run.py
+  427  ls
+  428  cd beacons
+  429  ls
+  430  cd portal
+  431  vi views.py
+  432  vi beacons.py
+  433  ls
+  434  cd ..
+  435  ls
+  436  cd ..
+  437  ls
+  438  ./run.py
+  439  ls
+  440  cd beacons/portal
+  441  vi views.py
+  442  cd ../..
+  443  ./run.py
+  444  ls
+  445  vi beacons/portal/views.py
+  446  ls
+  447  vi beacons/portal/beacons.py
+  448  ls
+  449  ./run.py
+  450  ls
+  451  vi beacons/portal/views.py
+  452  ls
+  453  ./run.py
+  454  vi beacons/portal/views.py
+  455  ./run.py
+  456  vi beacons/portal/views.py
+  457  ./run.py
+  458  vi beacons/portal/views.py
+  459  vi beacons/templates/beacons.jinja
+  460  vi beacons/templates/register.jinja
+  461  vi beacons/portal/views.py
+  462  vi beacons/templates/attachment.jinja
+  463  ls
+  464  vi beacons/portal/views.py
+  465  ls
+  466  ./run.py
+  467  ls
+  468  vi beacons/portal/views.py
+  469  ./run.py
+  470  vi beacons/portal/views.py
+  471  ./run.py
+  472  vi beacons/portal/views.py
+  473  ./run.py
+  474  ls
+  475  vi beacons/portal/views.py
+  476  cd beacons/templates
+  477  vi attachment_status.jinja
+  478  ../..
+  479  gst
+  480  ./run.py
+  481  ls
+  482  vi beacons/portal/beacons.py
+  483  vi config.py
+  484  ./run.py
+  485  ls
+  486  vi config.py
+  487  ls
+  488  ./run.py
+  489  ls
+  490  vi beacons/portal/views.py
+  491  ./run.py
+  492  ls
+  493  vi beacons/portal/views.py
+  494  vi beacons/portal/encode_decode.py
+  495  cd beacons/portal
+  496  ls
+  497  python encode_decode.py
+  498  vi beacons/portal/views.py
+  499  ls
+  500  cd ..
+  501  ls
+  502  cd portal
+  503  ls
+  504  vi views.py
+  505  vi beacons.py
+  506  ls
+  507  cd..
+  508  cd ..
+  509  ls
+  510  cd templates
+  511  ls
+  512  vi attachment.jinja
+  513  ls
+  514  cd ../..
+  515  ls
+  516  ./run.py
+  517  vi beacons/portal/views.py
+  518  vi beacons/portal/beacons.py
+  519  ./run.py
+  520  python
+  521  ls
+  522  vi beacons/portal/beacons.py
+  523  cd beacons/portal
+  524  python beacons.py
+  525  vi beacons/portal/beacons.py
+  526  vi beacons.py
+  527  python beacons.py
+  528  vi beacons.py
+  529  python beacons.py
+  530  vi beacons.py
+  531  python beacons.py
+  532  ls
+  533  python beacons.py
+  534  vi beacons.py
+  535  python beacons.py
+  536  vi beacons.py
+  537  ls
+  538  cd ../..
+  539  ls
+  540  ./run.py
+  541  ls
+  542  cd beacons
+  543  ls
+  544  cd portal
+  545  ls
+  546  vi views.py
+  547  ls
+  548  vi beacons.py
+  549  ls
+  550  cd ..
+  551  ls
+  552  cd templates
+  553  ls
+  554  vi register.jinja
+  555  vi attachment.jinja
+  556  ls
+  557  cd ..
+  558  ls
+  559  cd portal
+  560  ls
+  561  vi views.py
+  562  vi beacons.py
+  563  ls
+  564  cd ../..
+  565  ls
+  566  ./run.py
+  567  LS
+  568  cd beacons/portal/
+  569  ls
+  570  vi beacons.py
+  571  ls
+  572  cd ../..
+  573  ls
+  574  ./run.py
+  575  ls
+  576  cd portal
+  577  ls
+  578  cd ..
+  579  ls
+  580  cd templates
+  581  ls
+  582  vi attachment_status.jinja
+  583  vi registration_status.jinja
+  584  cd Devel
+  585  ls
+  586  cd beacons/beacons
+  587  ls
+  588  cd beacons
+  589  ls
+  590  cd templates
+  591  vi registration_status.jinja
+  592  vi unregistration_status.jinja
+  593  vi attachment_status.jinja
+  594  ls
+  595  cd ../..
+  596  ls
+  597  ./run.py
+  598  ls
+  599  cd beacons/templates
+  600  ls
+  601  vi attachment_status.jinja
+  602  ls
+  603  cd ../..
+  604  ./run.py
+  605  ls
+  606  cd beacons/templates
+  607  ls
+  608  vi attachment_status.jinja
+  609  ls
+  610  vi attachment_status.jinja
+  611  ls
+  612  cd ../..
+  613  ls
+  614  ./run.py
+  615  ls
+  616  vi beacons/templates/attachment_status.jinja
+  617  vi beacons/portal/views.py
+  618  ls
+  619  ./run.py
+  620  ls
+  621  vi beacons/portal/views.py
+  622  ls
+  623  cd ..
+  624  ls
+  625  cd beacons
+  626  ls
+  627  ./run.py
+  628  ls
+  629  vi beacons/portal/views.py
+  630  ./run.py
+  631  vi beacons/portal/views.py
+  632  ./run.py
+  633  ls
+  634  vi beacons/portal/views.py
+  635  ./run.py
+  636  ls
+  637  vi beacons/portal/views.py
+  638  ./run.py
+  639  vi beacons/portal/views.py
+  640  ./run.py
+  641  ls
+  642  vi beacons/portal/views.py
+  643  ./run.py
+  644  vi beacons/portal/views.py
+  645  ./run.py
+  646  vi beacons/portal/views.py
+  647  ./run.py
+  648  ls
+  649  vi beacons/portal/views.py
+  650  ls
+  651  ./run.py
+  652  ls
+  653  vi beacons/templates/attachment_status.jinja
+  654  ./run.py
+  655  ls
+  656  vi beacons/templates/attachment_status.jinja
+  657  vi beacons/portal/views.py
+  658  ./run.py
+  659  git status
+  660  git add .
+  661  git status
+  662  git commit -m "Portal is now able to add attachments to beacons"
+  663  git status
+  664  git branch -a
+  665  git checkout remotes/origin/develop
+  666  git status
+  667  git stash
+  668  git checkout remotes/origin/develop
+  669  git branch -a
+  670  git fetch
+  671  git checkout remotes/origin/develop
+  672  git branch -a
+  673  git checkout master
+  674  git status
+  675  git branch -a
+  676  git checkout develop
+  677  git status
+  678  git logs
+  679  git log
+  680  cat .gitconfig
+  681  ls -la
+  682  cat .git/config
+  683  open .git/config
+  684  git status
+  685  git branch -a
+  686  git fetch
+  687  open .git/config
+  688  git pull
+  689  git push
+  690  git pull rebase
+  691  git pull 
+  692  git pull rebase
+  693  git pull --rebase
+  694  git log
+  695  git checkout master
+  696  git branch -a
+  697  git pull
+  698  gl
+  699  git log
+  700  git checkout develop
+  701  git log
+  702  git pull --rebase origin develop
+  703  git push -uv origin develop
+  704  git remote -v
+  705  git remote add up git@github.com:rajatguptarg/beacons.git
+  706  git pull --rebase up develop
+  707  ls
+  708  git diff --name-only | uniq | xargs subl
+  709  git diff --name-only | uniq | beacons subl
+  710  grep -inr ">>>>HEAD"
+  711  grep -inr ">>>>HEAD" .
+  712  ls
+  713  sublime beacons/portal/beacons.py
+  714  ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" ~/bin/subl
+  715  ls
+  716  open /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl
+  717  /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl ; exit;
+  718  ln -s /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl /usr/local/bin/sublime
+  719  open ~/.bash_profile
+  720  open ~/.profile
+  721  source ~/.bash_profile
+  722  sublime .
+  723  sublime Beacons/beacons/beacons/portal/views.py
+  724  sublime beacons/portal/beacons.py
+  725  sublime beacons/portal/views.py
+  726  sublime beacons/templates/register.jinja
+  727  gst
+  728  git add .
+  729  git rebase --continue
+  730  ls
+  731  ./run.py
+  732  ls
+  733  cd beacons/portal
+  734  ls
+  735  vi views.py
+  736  ls
+  737  cd ..
+  738  ls
+  739  cd ..
+  740  ls
+  741  ./run.py
+  742  cd beacons/portal
+  743  ls
+  744  vi views.py
+  745  ./run.py
+  746  cd ../..
+  747  ./run.py 
+  748  vi beacons/portal/beacons.py
+  749  ls
+  750  ./run.py
+  751  sublime beacons/portal/beacons.py
+  752  ./run.py
+  753  sublime beacons/portal/beacons.py
+  754  ./run.py
+  755  ls
+  756  sublime beacons/portal/beacons.py
+  757  pip install Flask-WTF
+  758  ls
+  759  ./run.py
+  760  sublime config.py
+  761  ./run.py
+  762  ls
+  763  sublime beacon_name.py
+  764  ./run.py
+  765  sublime beacons/templates/register.jinja
+  766  sublime beacons/templates/attachment.jinja
+  767  sublime beacons/templates/base.jinja
+  768  sublime beacons/templates/beacons.jinja
+  769  ./run.py
+  770  ls
+  771  ./run.py
+  772  ls
+  773  ./run.py
+  774  ls
+  775  ./run.py
+  776  ls
+  777  ./run.py
+  778  ls
+  779  git log
+  780  git checkout 0c6f5fbf38ffebf2cd1194f5f3d918029b10a21e
+  781  ls
+  782  ./run.py
+  783  ls
+  784  git reset --hard  0c6f5fbf38ffebf2cd1194f5f3d918029b10a21e
+  785  ls
+  786  ./run.py
+  787  sublime beacons/portal/views.py
+  788  git log
+  789  gst
+  790  git diff
+  791  git rebase --abort
+  792  git checkout develop
+  793  ls
+  794  git log
+  795  gst
+  796  git log
+  797  git diff
+  798  git show
+  799  git log
+  800  git show  0c6f5fbf38ffe
+  801  git log
+  802  git show
+  803  ls
+  804  ./run.py
+  805  ls
+  806  git stash
+  807  ls
+  808  cd po
+  809  ls
+  810  cd beacons/portal
+  811  ls
+  812  vi views.py
+  813  ls
+  814  cd Devel/beacons/beacons
+  815  LS
+  816  sublime beacons/portal/views.py
+  817  sublime beacons/portal/beacons.py
+  818  sublime beacons/templates/registration_status.jinja
+  819  sublime beacons/templates/unregistration_status.jinja
+  820  sublime beacons/templates/register.jinja
+  821  sublime beacons/templates/unregister.jinja
+  822  sublime beacons/templates/attachment_status.jinja
+  823  sublime beacons/templates/attachment.jinja
+  824  ./run.py
+  825  sublime beacons/portal/views.py
+  826  ./run.py
+  827  sublime beacons/portal/views.py
+  828  ./run.py
+  829  workon beacons 
+  830  ls
+  831  cd beacons
+  832  ls
+  833  ./run.py
+  834  sublime beacons/portal/views.py
+  835  sublime beacons/portal/beacons.py
+  836  ./run.py
+  837  ls
+  838  cd beacons/portal
+  839  ls
+  840  sublime views.py
+  841  cd ../..
+  842  ./run.py
+  843  ls
+  844  ./run.py
+  845  ls
+  846  ./run.py
+  847  ls
+  848  cd beacons/templates
+  849  ls
+  850  sublime beacons.jinja
+  851  sublime unregistration_status.jinja
+  852  sublime unregister.jinja
+  853  ls
+  854  cd ../..
+  855  ls
+  856  ./run.py
+  857  ls
+  858  sublime beacons/templates/attachment_status.jinja
+  859  cd ../..
+  860  ls
+  861  cd beacons/beacons
+  862  ls
+  863  ./run.py
+  864  ls
+  865  sublime beacons/portal
+  866  sublime beacons/templates/attachment_status.jinja
+  867  ls
+  868  ./run.py
+  869  ls
+  870  ./run.py
+  871  sublime beacons
+  872  ./run.py
+  873  ls
+  874  ./run.py
+  875  python
+  876  ./run.py
+  877  python
+  878  ./run.py
+  879  vi sample.py
+  880  ls
+  881  python sample.py
+  882  vi sample.py
+  883  python sample.py
+  884  vi sample.py
+  885  python sample.py
+  886  vi sample.py
+  887  python sample.py
+  888  vi sample.py
+  889  ./run.py
+  890  ls
+  891  python
+  892  ls
+  893  clear
+  894  python
+  895  ls
+  896  vi sample.
+  897  vi sample.py
+  898  vi sample.pylprint is_json("{}")              #prints True
+  899  print is_json("{asdf}")          #prints False
+  900  print is_json('{ "age":100}')    #prints True
+  901  print is_json("{'age':100 }")    #prints False
+  902  python sample.py
+  903  vi sample.py
+  904  python sample.py
+  905  vi sample.py
+  906  python sample.py
+  907  vi sample.py
+  908  python sample.py
+  909  vi sample.py
+  910  python sample.py
+  911  vi sample.py
+  912  python sample.py
+  913  vi sample.py
+  914  python sample.py
+  915  vi sample.py
+  916  python sample.py
+  917  vi sample.py
+  918  python sample.py
+  919  vi sample.py
+  920  python
+  921  ./run.py
+  922  sublime beacons/templates/attachment.jinja
+  923  ./run.py
+  924  python
+  925  ./run.py
+  926  python sample.py
+  927  python
+  928  ls
+  929  ./run.py
+  930  vi sample.py
+  931  ./run.py
+  932  ls
+  933  vi sim.py
+  934  python sim.py
+  935  sudo pip install easygui
+  936  python sim.py
+  937  sudo pip install easyguils
+  938  ls
+  939  ./run.py
+  940  pip install easygui
+  941  ls
+  942  ./run.py
+  943  python sim.py
+  944  ./run.py
+  945  python sim.py
+  946  vi sim.py
+  947  vi sim1.py
+  948  python sim1.py
+  949  sudo install win32api
+  950  sudo pip install win32api
+  951  sudo pip install ctypes
+  952* pip install ctypes
+  953* pip install pymsgbox
+  954  sudo pip install pymsgbox
+  955  vi sim1.py
+  956  python sim1.py
+  957* ./run.py
+  958  python sim1.py
+  959* ./run.py
+  960  ls
+  961  cd Devel/beacons/beacons
+  962  ls
+  963  workon beacons
+  964  ls
+  965  cd beacons
+  966  ls
+  967  ./run.py
+  968  ls
+  969* python sim1.py
+  970  ls
+  971  ./run.py
+  972  ls
+  973  cd beacons/templates
+  974  vi wrongmsg.jinja
+  975  ls
+  976  cd ../..
+  977  ls
+  978  ./run.py
+  979  sublime beacons
+  980  ls
+  981  ./run.py
+  982  history
+  983  wq

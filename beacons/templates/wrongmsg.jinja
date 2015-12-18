@@ -1,0 +1,9 @@
+{% extends "base.jinja" %}
+
+{% block content %}
+	<script>
+	   {% if(status == 'invalid') %}
+      		alert("I am an alert box!")
+  	   {% endif %}       
+	</script>
+{% endblock %}

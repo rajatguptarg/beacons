@@ -28,18 +28,19 @@
                 </div>
 
 
-		<div class="form-group">
+                <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Message:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="msg" placeholder="Enter Message to attach">
+                        <textarea rows=5 cols=40 class="form-control" name="msg" placeholder="Enter Message to attach"></textarea>
                     </div>
                 </div>
 
 
+                <strong>Please enter the data in form of json (ex: {"name : "parul"}</strong>
 
                 <div class="form-group">
                     <div class="col-xs-offset-4 col-xs-8">
-                        <input type="submit" class="btn btn-success" value="Submit">
+                        <input type="submit" onclick="myFunction()" class="btn btn-success" value="Submit">
                         <input type="reset" class="btn btn-danger" value="Reset">
                     </div>
                 </div>
@@ -47,4 +48,8 @@
         </div>
         <div class="col-md-4"></div></div>
     </div>
+    <script>
+    function myFunction() {
+        alert("hello")
+    </script>
 {% endblock %}
