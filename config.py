@@ -12,6 +12,12 @@ BEACON = 'https://proximitybeacon.googleapis.com/v1beta1/'
 
 DEACTIVATE = ':deactivate'
 
+ATTACHMENT = 'https://proximitybeacon.googleapis.com/v1beta1/namespaces'
+
+ATTACH_BEACONS = 'https://proximitybeacon.googleapis.com/v1beta1/'
+
+ATTACH = '/attachments'
+
 ERROR = 'ERROR'
 
 SUCCESS = 'SUCCESS'

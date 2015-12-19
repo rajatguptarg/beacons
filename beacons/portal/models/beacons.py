@@ -14,6 +14,8 @@ class Beacon(object):
         self.expected_stability = form.get('expected_stability')
         self.position = form.get('position')
         self.place_id = form.get('place_id')
+        self.msg = form.get('msg')
+        self.namespace = "proximity-test-1146/json"
 
     def registration_request_body(self):
         """
@@ -55,5 +57,15 @@ class Beacon(object):
             "properties": {
                 "position": self.position,
             }
+        }
+        return body
+
+    def attachment_request_body(self):
+        """
+        Return the request body in json format
+        """
+        body = {
+            "namespacedType": self.namespace,
+            "data": (self.msg).encode('base64', 'strict')
         }
         return body
