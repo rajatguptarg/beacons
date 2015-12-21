@@ -16,4 +16,5 @@ include .coveragerc
 exclude *.pyc, *.swp
 graft templates
 graft static
+include *.conf
 recursive-include beacons *
