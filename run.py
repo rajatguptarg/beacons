@@ -20,4 +20,8 @@ if __name__ == '__main__':
     logfile.debug("Debug FILE")
     logconsole.debug("Debug CONSOLE")
 
+    @app.errorhandler(Exception)
+    def handle_error(e):
+        logging.error('Raised an Error - ' + e)
+
     app.run(debug=True)

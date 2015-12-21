@@ -3,7 +3,8 @@
 LIST_BEACONS = \
     'https://proximitybeacon.googleapis.com/v1beta1/beacons?pageSize=100'
 
-SCOPE = 'https://www.googleapis.com/auth/userlocation.beacon.registry'
+SCOPE = 'https://www.googleapis.com/auth/userinfo.profile \
+    https://www.googleapis.com/auth/userlocation.beacon.registry'
 
 REGISTER_BEACONS = \
     'https://proximitybeacon.googleapis.com/v1beta1/beacons:register'

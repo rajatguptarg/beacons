@@ -27,6 +27,10 @@ def list_beacons():
         logging.info('Beacons are listed with OAuth Token - ' +
             credentials.access_token)
         header = Header(credentials.access_token)
+
+        import pdb
+        pdb.set_trace()
+
         auth_request = session.get(LIST_BEACONS,
             headers=header.get_header_body())
 
