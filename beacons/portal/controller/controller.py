@@ -52,4 +52,4 @@ def modify_beacon(beacon, credentials):
     url = url_builder.beacon_modification_url(beacon)
     response = requests.put(url, data=json.dumps(request_body),
         headers=header.get_header_body())
-    return response.content
+    return json.loads(response.content)

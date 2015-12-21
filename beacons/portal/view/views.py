@@ -4,7 +4,7 @@ import requests
 from oauth2client import client
 import json
 import base64
-from config import LIST_BEACONS, SCOPE, ATTACHMENT
+from config import LIST_BEACONS, SCOPE, ATTACHMENT, SUCCESS, ERROR
 from beacons.portal.controller import controller
 from beacons.portal.models import Beacon, Header
 
@@ -116,8 +116,7 @@ def edit_beacon_status():
     else:
         beacon_details = Beacon(request.form)
         status = controller.modify_beacon(beacon_details, credentials)
-
-        # TODO: Make proper status based upon respnse
+        status = SUCCESS if status.get('beaconName') else ERROR
         return render_template(
             'edit_beacon_status.jinja', status=status
         )
