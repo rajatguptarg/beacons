@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, flash, request
 import flask
 import requests
 from oauth2client import client
@@ -161,6 +161,12 @@ def beacon_attachment_status():
     else:
         beacon = Beacon(request.form)
         status = controller.attach_data_to_beacon(beacon, credentials)
+
+        try:
+            json.loads(request.form['msg'])
+        except ValueError:
+            flash('Invalid Input !!!!')
+            return flask.redirect(flask.url_for('portal.attachment_beacons'))
 
         ans = base64.b64decode((json.loads(status))['data'])
         finalans = json.loads(ans)

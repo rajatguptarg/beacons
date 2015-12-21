@@ -2,6 +2,7 @@ class Beacon(object):
     """
     Beacon Details
     """
+
     def __init__(self, form):
         self.beacon_name = form.get('name')
         self.advertised_id = form.get('advid')
@@ -64,6 +65,7 @@ class Beacon(object):
         """
         Return the request body in json format
         """
+
         body = {
             "namespacedType": self.namespace,
             "data": (self.msg).encode('base64', 'strict')

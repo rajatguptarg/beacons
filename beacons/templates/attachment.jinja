@@ -20,6 +20,11 @@
                     </div>
                 </div>
 
+                <br>
+                {% for message in get_flashed_messages() %}
+                    <div class="flash" style="color: red">{{ message }}</div>
+                {% endfor %}
+
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Message:</label>
                     <div class="col-xs-7">
@@ -28,7 +33,7 @@
                 </div>
 
 
-                <strong>Please enter the data in form of json (ex: {"name : "parul"})</strong>
+                <strong>Please enter the data in form of json (ex: {"name" : "parul"})</strong>
 
                 <div class="form-group">
                     <div class="col-xs-offset-4 col-xs-8">
