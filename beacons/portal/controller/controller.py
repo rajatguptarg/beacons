@@ -31,6 +31,18 @@ def deactivate_beacon(beacon_details, credentials):
     return status
 
 
+def attach_data_to_beacon(beacon_details, credentials):
+    """
+    Attaches data to beacon
+    """
+    request_body = beacon_details.attachment_request_body()
+    header = Header(credentials.access_token)
+    url = url_builder.beacon_attachment_url(beacon_details)
+    response = requests.post(url, data=json.dumps(request_body),
+        headers=header.get_header_body())
+    return response.content
+
+
 def modify_beacon(beacon, credentials):
     """
     Modify the details of existing beacons
@@ -40,4 +52,4 @@ def modify_beacon(beacon, credentials):
     url = url_builder.beacon_modification_url(beacon)
     response = requests.put(url, data=json.dumps(request_body),
         headers=header.get_header_body())
-    return response.content
+    return json.loads(response.content)

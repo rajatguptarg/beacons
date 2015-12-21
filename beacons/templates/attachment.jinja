@@ -1,0 +1,52 @@
+{% extends "base.jinja" %}
+
+{% block title %}
+    Attach
+{% endblock %}
+
+{% block content %}
+    <legend><h1>
+        Attach Message To Beacon
+    </h1></legend>
+    <br>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <form class="form-horizontal" action="{{ url_for('portal.beacon_attachment_status') }}" method="post">
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="name">Beacon Name:</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" name="name" placeholder="Enter name of beacon">
+                    </div>
+                </div>
+
+                <br>
+                {% for message in get_flashed_messages() %}
+                    <div class="flash" style="color: red">{{ message }}</div>
+                {% endfor %}
+
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="name">Message:</label>
+                    <div class="col-xs-7">
+                        <textarea rows=5 cols=40 class="form-control" name="msg" placeholder="Enter Message to attach"></textarea>
+                    </div>
+                </div>
+
+
+                <strong>Please enter the data in form of json (ex: {"name" : "parul"})</strong>
+
+                <div class="form-group">
+                    <div class="col-xs-offset-4 col-xs-8">
+                        <input type="submit" onclick="myFunction()" class="btn btn-success" value="Submit">
+                        <input type="reset" class="btn btn-danger" value="Reset">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4"></div></div>
+    </div>
+    <script>
+    function myFunction() {
+        alert("hello")
+    </script>
+{% endblock %}
