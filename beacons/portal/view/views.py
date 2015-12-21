@@ -1,12 +1,12 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, flash, request
 import flask
 import requests
 from oauth2client import client
 import json
-from config import LIST_BEACONS, SCOPE
+import base64
+from config import LIST_BEACONS, SCOPE, ATTACHMENT
 from beacons.portal.controller import controller
 from beacons.portal.models import Beacon, Header
-
 
 portal = Blueprint('portal', __name__)
 session = requests.Session()
@@ -19,6 +19,7 @@ def list_beacons():
     credentials = client.OAuth2Credentials.from_json(
         flask.session['credentials']
     )
+
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
@@ -83,6 +84,7 @@ def unregister_beacons_status():
     credentials = client.OAuth2Credentials.from_json(
         flask.session['credentials']
     )
+
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
@@ -114,7 +116,61 @@ def edit_beacon_status():
     else:
         beacon_details = Beacon(request.form)
         status = controller.modify_beacon(beacon_details, credentials)
+
         # TODO: Make proper status based upon respnse
         return render_template(
             'edit_beacon_status.jinja', status=status
+        )
+
+
+@portal.route('/namespace', methods=['GET'])
+def beacon_namespace():
+    if 'credentials' not in flask.session:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    credentials = client.OAuth2Credentials.from_json(
+        flask.session['credentials']
+    )
+
+    if credentials.access_token_expired:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    else:
+        header = Header(credentials.access_token)
+        response = requests.get(ATTACHMENT,
+            headers=header.__str__())
+
+        return render_template(
+            'namespace_status.jinja', status=json.loads(response.content)
+        )
+
+
+@portal.route('/attachment')
+def attachment_beacons():
+    return render_template('attachment.jinja')
+
+
+@portal.route('/attachment-status', methods=['POST'])
+def beacon_attachment_status():
+    if 'credentials' not in flask.session:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    credentials = client.OAuth2Credentials.from_json(
+        flask.session['credentials']
+    )
+
+    if credentials.access_token_expired:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    else:
+        beacon = Beacon(request.form)
+        status = controller.attach_data_to_beacon(beacon, credentials)
+
+        try:
+            json.loads(request.form['msg'])
+        except ValueError:
+            flash('Invalid Input !!!!')
+            return flask.redirect(flask.url_for('portal.attachment_beacons'))
+
+        ans = base64.b64decode((json.loads(status))['data'])
+        finalans = json.loads(ans)
+        return render_template(
+            'attachment_status.jinja',
+             status1=finalans, status=json.loads(status)
         )
