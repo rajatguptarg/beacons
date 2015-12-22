@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from config import REGISTER_BEACONS, ERROR, SUCCESS
+from config import REGISTER_BEACONS, ERROR, SUCCESS, LIST_BEACONS
 import json
 import requests
 from beacons.portal.helper import BeaconHelper, URLBuilder
@@ -7,6 +7,15 @@ from beacons.portal.models import Header
 
 beacon_helper = BeaconHelper()
 url_builder = URLBuilder()
+
+
+def list_beacons(credentials):
+    """
+    Returns list of the registered beacons
+    """
+    header = Header(credentials.access_token)
+    response = requests.get(LIST_BEACONS, headers=header.get_header_body())
+    return json.loads(response.content)
 
 
 def register_beacon(beacon, credentials):
@@ -17,7 +26,7 @@ def register_beacon(beacon, credentials):
     header = Header(credentials.access_token)
     response = requests.post(REGISTER_BEACONS, data=json.dumps(request_body),
         headers=header.get_header_body())
-    return response.content
+    return json.loads(response.content)
 
 
 def deactivate_beacon(beacon_details, credentials):
