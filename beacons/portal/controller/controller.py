@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from config import REGISTER_BEACONS, ERROR, SUCCESS, LIST_BEACONS
+from config import REGISTER_BEACONS, ERROR, SUCCESS, LIST_BEACONS, USER_INFO
 import json
 import requests
 from beacons.portal.helper import BeaconHelper, URLBuilder
@@ -62,3 +62,12 @@ def modify_beacon(beacon, credentials):
     response = requests.put(url, data=json.dumps(request_body),
         headers=header.get_header_body())
     return json.loads(response.content)
+
+
+def get_session_username(credentials):
+    """
+    Returns the name of the user of the logged in User
+    """
+    header = Header(credentials.access_token)
+    response = requests.get(USER_INFO, headers=header.get_header_body())
+    return str(json.loads(response.content).get('name'))

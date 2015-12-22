@@ -7,24 +7,33 @@ import base64
 from config import SCOPE, ATTACHMENT, SUCCESS, ERROR
 from beacons.portal.controller import controller
 from beacons.portal.models import Beacon, Header
+import beacons
+
 
 portal = Blueprint('portal', __name__)
 session = requests.Session()
 
 
+@portal.errorhandler(ValueError)
+def page_not_found(e):
+    beacons.app.logger.error(e)
+
+
 @portal.route('/')
 def list_beacons():
     if 'credentials' not in flask.session:
+        beacons.app.logger.info('Creating the new session.')
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     credentials = client.OAuth2Credentials.from_json(
         flask.session['credentials']
     )
 
     if credentials.access_token_expired:
+        beacons.app.logger.info('Session Expired. Login Agained.')
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        return render_template('beacons.jinja',
-            beacons=controller.list_beacons(credentials))
+        beacon = controller.list_beacons(credentials)
+        return render_template('beacons.jinja', beacons=beacon)
 
 
 @portal.route('/oauth2callback')
@@ -61,6 +70,13 @@ def register_beacons_status():
     else:
         beacon = Beacon(request.form)
         data = controller.register_beacon(beacon, credentials)
+        name = controller.get_session_username(credentials)
+        if data.get('error'):
+            beacons.app.logger.warning('USER: ' + name + '\nBeacon with ' +
+                str(beacon) + ' failed to register.')
+        else:
+            beacons.app.logger.info('USER: ' + name +
+                '\nBeacon with ' + str(beacon) + ' registered successfully.')
         return render_template(
             'registration_status.jinja', status=data)
 
@@ -83,7 +99,10 @@ def unregister_beacons_status():
     else:
         beacon = Beacon(request.form)
         status = controller.deactivate_beacon(beacon, credentials)
+        user = controller.get_session_username(credentials)
         # TODO: Make proper status based upon respnse
+        beacons.app.logger.info('USER: ' + user + '\nBeacon with ' +
+            str(beacon) + ' unregistration successful.')
         return render_template(
             'unregistration_status.jinja', status=status
         )
@@ -107,9 +126,16 @@ def edit_beacon_status():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon_details = Beacon(request.form)
-        status = controller.modify_beacon(beacon_details, credentials)
+        beacon = Beacon(request.form)
+        user = controller.get_session_username(credentials)
+        status = controller.modify_beacon(beacon, credentials)
         status = SUCCESS if status.get('beaconName') else ERROR
+        if status == SUCCESS:
+            beacons.app.logger.info('USER:' + user + '\nModified beacon' +
+            ' with ' + str(beacon) + 'successfully.')
+        else:
+            beacons.app.logger.warning('USER:' + user + '\nModified beacon' +
+                ' with ' + str(beacon) + ' failed.')
         return render_template(
             'edit_beacon_status.jinja', status=status
         )
@@ -153,10 +179,14 @@ def beacon_attachment_status():
     else:
         beacon = Beacon(request.form)
         status = controller.attach_data_to_beacon(beacon, credentials)
-
+        user = controller.get_session_username(credentials)
         try:
             json.loads(request.form['msg'])
+            beacons.app.logger.info('USER:' + user + '\nAdded attachement to' +
+                ' beacon with ' + str(beacon) + ' successfully.')
         except ValueError:
+            beacons.app.logger.error('USER:' + user + '\nAdded attachement' +
+                ' to beacon with ' + str(beacon) + ' raised valued error.')
             flash('Invalid Input !!!!')
             return flask.redirect(flask.url_for('portal.attachment_beacons'))
 

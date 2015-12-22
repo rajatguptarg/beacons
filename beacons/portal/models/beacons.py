@@ -71,3 +71,11 @@ class Beacon(object):
             "data": (self.msg).encode('base64', 'strict')
         }
         return body
+
+    def __str__(self):
+        if self.beacon_name:
+            return 'Beacon Name: ' + str(self.beacon_name)
+        else:
+            return 'Advertised Id: ' + str(self.advertised_id)
+
+    __repr__ = __str__
