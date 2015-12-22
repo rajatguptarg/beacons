@@ -1,0 +1,22 @@
+{% extends "base.jinja" %}
+
+{% block title %} Status {% endblock %}
+   
+{% block content %}
+
+    <strong> {{msg}} <strong>
+
+  {% for key in attachment%}
+        <strong>{{key}} : </strong> {{attachment[key]}} <br>
+  {% endfor %}      
+
+  {% for key in status%}
+        {% if key == 'attachmentName' %}
+            <strong>Attachment Name:</strong> {{ status[key] }}<br>
+        {% endif %}
+        {% if key == 'namespacedType' %}
+            <strong>Namespace:</strong> {{ status[key] }}<br>
+        {% endif %}
+  {% endfor %}  
+
+{% endblock %}

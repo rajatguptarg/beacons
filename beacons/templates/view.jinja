@@ -1,0 +1,38 @@
+{% extends "base.jinja" %}
+
+{% block title %}
+    Unregister
+{% endblock %}
+
+{% block content %}
+    <legend><h1>
+        VIEW ATTACHMENTS
+    </h1></legend>
+    <br>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <form class="form-horizontal" action="{{ url_for('portal.list_beacons_attachment') }}" method="post">
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="name">Beacon Name:</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" name="name" placeholder="Enter name of beacon" value = {{beacon }}>
+                    </div>
+                </div>
+
+   <div class="form-group">
+                    <div class="col-xs-offset-4 col-xs-8">
+                        <input type="submit" class="btn btn-success" value="Submit">
+                        <input type="reset" class="btn btn-danger" value="Reset">
+                    </div>
+                </div>
+
+                  {% for message in get_flashed_messages() %}
+                    <div class="flash" style="color: red">{{ message }}</div>
+                {% endfor %}
+                
+            </form>
+        </div>
+        <div class="col-md-4"></div></div>
+    </div>
+{% endblock %}

@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 import os
-from config import REGISTER_BEACONS, ERROR, SUCCESS
-from config import LIST_BEACONS, USER_INFO, NAMESPACE
->>>>>>> Resolved Errors
 import json
 import requests
 from beacons.portal.models import Header
@@ -22,6 +19,12 @@ def list_beacons(credentials):
     header = Header(credentials.access_token)
     response = requests.get(LIST_BEACONS, headers=header.get_header_body())
     return json.loads(response.content)
+
+def beacon_view_attachment_url(self, beacon_details):
+    """
+    Returns URL to attach data to the beacons
+    """
+    return BEACON + beacon_details.beacon_name + ATTACH + QUERY
 
 
 def register_beacon(beacon, credentials):
@@ -77,6 +80,7 @@ def get_session_username(credentials):
     header = Header(credentials.access_token)
     response = requests.get(USER_INFO, headers=header.get_header_body())
     return str(json.loads(response.content).get('name'))
+
 
 
 def get_estimote_details(advertised_id):

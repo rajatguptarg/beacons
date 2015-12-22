@@ -125,6 +125,46 @@ def unregister_beacons_status():
         )
 
 
+
+@portal.route('/view', methods=['POST'])
+def view_beacon():
+    """
+    Render template for edit beacon details
+    """
+    return render_template(
+        'view.jinja', beacon=request.form.get('name'),
+        advid=request.form.get('advid')
+    )
+
+
+@portal.route('/viewattach', methods=['POST'])
+def list_beacons_attachment():
+    """
+    Returns status of deactivation of beacon
+    """
+    if 'credentials' not in flask.session:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    credentials = client.OAuth2Credentials.from_json(
+        flask.session['credentials']
+    )
+    if credentials.access_token_expired:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    else:
+        beacon = Beacon(request.form)
+        status = controller.list_beacons_attachment(beacon, credentials)
+
+        if ("attachments") in (json.loads(status)):
+            decoded_message = base64.b64decode(
+                (json.loads(status))['attachments'][0]['data']
+            )
+            attached_data = json.loads(decoded_message)
+            return render_template('view_attachment.jinja',
+                attachment=attached_data, status=json.loads(status))
+        else:
+            return render_template('view_attachment.jinja',
+                msg="Sorry No Attachments Found")
+
+
 @portal.route('/edit', methods=['POST'])
 def edit_beacon():
     """
@@ -186,6 +226,7 @@ def attachment_beacons():
     return render_template('attachment.jinja', beacon=namespace)
 
 
+
 @portal.route('/attachment-status', methods=['POST'])
 def beacon_attachment_status():
     """
@@ -217,6 +258,7 @@ def beacon_attachment_status():
 
         decoded_message = base64.b64decode((json.loads(status))['data'])
         attached_data = json.loads(decoded_message)
+
         return render_template('attachment_status.jinja',
              attachment=attached_data, status=json.loads(status)
         )
@@ -231,5 +273,4 @@ def estimote_cloud_details():
     advertised_id = request.form.get('advid')
     beacon = controller.get_estimote_details(advertised_id)
     return render_template('estimote_details.jinja', beacon=beacon)
-
 

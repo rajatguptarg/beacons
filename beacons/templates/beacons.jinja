@@ -44,6 +44,7 @@ n type="button" class="btn btn-primary" onclick="location.href='namespace'">Name
                 <th class="info" class="info">Description</th>
                 <th class="info" class="info">Position</th>
                 <th class="info" class="info">Indoor Level Name</th>
+                <th class="info" class="info">Attachments</th>
                 <th class="info" colspan="2" class="info">More</th>
             </tr>
             {% for beacon in beacons.beacons %}
@@ -62,6 +63,20 @@ n type="button" class="btn btn-primary" onclick="location.href='namespace'">Name
                     {% if beacon.indoorLevel %}
                         <td class="active">{{ beacon.indoorLevel.name }}</td>
                     {% else %}
+                        <td class="active"></td>
+                    {% endif %}
+                    {% if beacon.indoorLevel %}
+                        <form class="form-horizontal" action="{{ url_for('.view_beacon') }}" method="post">
+                          <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}> 
+                          <div class="form-group">
+                              <div class="col-xs-offset-4 col-xs-8">
+                                  <td class="active">
+                                      <input type="submit" class="btn btn-success" value="Message">
+                                  </td>
+                              </div>
+                          </div>
+                        </form>
+                    {% else %} 
                         <td class="active"></td>
                     {% endif %}
                     <form class="form-horizontal" id="estimote" action="{{ url_for('portal.estimote_cloud_details') }}" method="post">
