@@ -13,6 +13,17 @@
         <div class="col-md-4"></div>
         <div class="col-md-4">
           <form class="form-horizontal" action="{{ url_for('portal.beacon_attachment_status') }}" method="post">
+
+
+                <div class="form-group">
+                    <label class="control-label col-xs-3" for="name">NameSpace:</label>
+                    <div class="col-xs-7">
+                        <input type="text" class="form-control" name="namespace" value={{beacon}}>
+                    </div>
+                </div>
+
+
+
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Beacon Name:</label>
                     <div class="col-xs-7">

@@ -5,7 +5,7 @@ import requests
 from beacons.portal.models import Header
 from beacons.portal.helper import BeaconHelper, URLBuilder
 from config import REGISTER_BEACONS, ERROR, SUCCESS, LIST_BEACONS, \
-    USER_INFO, ESTIMOTE_CMD
+    USER_INFO, ESTIMOTE_CMD, NAMESPACE
 
 
 beacon_helper = BeaconHelper()
@@ -76,6 +76,7 @@ def get_session_username(credentials):
     return str(json.loads(response.content).get('name'))
 
 
+
 def get_estimote_details(advertised_id):
     """
     Returns the namespace and instance id of the beacon
@@ -89,3 +90,13 @@ def get_estimote_details(advertised_id):
         if beacon_namespace == namespace and beacon_instane == instance:
             return beacon
     return None
+
+def namespace_of_beacon(beacon_details, credentials):
+    """
+    NameSpace of beacon
+    """
+    header = Header(credentials.access_token)
+    response = requests.get(NAMESPACE, headers=header.__str__())
+    return json.loads(response.content)
+
+
