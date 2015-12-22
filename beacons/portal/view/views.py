@@ -226,7 +226,6 @@ def attachment_beacons():
     return render_template('attachment.jinja', beacon=namespace)
 
 
-
 @portal.route('/attachment-status', methods=['POST'])
 def beacon_attachment_status():
     """
@@ -257,11 +256,12 @@ def beacon_attachment_status():
             return flask.redirect(flask.url_for('portal.attachment_beacons'))
 
         decoded_message = base64.b64decode((json.loads(status))['data'])
-        attached_data = json.loads(decoded_message)
+
 
         return render_template('attachment_status.jinja',
              attachment=attached_data, status=json.loads(status)
         )
+
 
 
 
