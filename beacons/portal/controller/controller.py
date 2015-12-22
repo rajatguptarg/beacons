@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 import os
+from config import REGISTER_BEACONS, ERROR, SUCCESS
+from config import LIST_BEACONS, USER_INFO, NAMESPACE
+>>>>>>> Resolved Errors
 import json
 import requests
 from beacons.portal.models import Header
@@ -76,7 +79,6 @@ def get_session_username(credentials):
     return str(json.loads(response.content).get('name'))
 
 
-
 def get_estimote_details(advertised_id):
     """
     Returns the namespace and instance id of the beacon
@@ -98,5 +100,4 @@ def namespace_of_beacon(beacon_details, credentials):
     header = Header(credentials.access_token)
     response = requests.get(NAMESPACE, headers=header.__str__())
     return json.loads(response.content)
-
 

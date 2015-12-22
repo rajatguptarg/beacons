@@ -7,9 +7,10 @@ import flask
 import requests
 from flask import Blueprint, render_template, flash, request
 from oauth2client import client
-from config import SCOPE, ATTACHMENT, SUCCESS, ERROR
+from config import SCOPE, SUCCESS, ERROR
 from beacons.portal.controller import controller
 from beacons.portal.models import EddyStone, Header, IBeacon
+from beacons.portal.models import Beacon
 import beacons
 
 portal = Blueprint('portal', __name__)
@@ -185,7 +186,6 @@ def attachment_beacons():
     return render_template('attachment.jinja', beacon=namespace)
 
 
-
 @portal.route('/attachment-status', methods=['POST'])
 def beacon_attachment_status():
     """
@@ -222,6 +222,7 @@ def beacon_attachment_status():
         )
 
 
+
 @portal.route('/estimote-details', methods=['POST'])
 def estimote_cloud_details():
     """
@@ -230,4 +231,5 @@ def estimote_cloud_details():
     advertised_id = request.form.get('advid')
     beacon = controller.get_estimote_details(advertised_id)
     return render_template('estimote_details.jinja', beacon=beacon)
+
 
