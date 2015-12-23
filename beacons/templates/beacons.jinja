@@ -45,7 +45,7 @@ n type="button" class="btn btn-primary" onclick="location.href='namespace'">Name
                 <th class="info" class="info">Description</th>
                 <th class="info" class="info">Position</th>
                 <th class="info" class="info">Indoor Level Name</th>
-                <th class="info" class="info">More</th>
+                <th class="info" colspan="2" class="info">More</th>
             </tr>
             {% for beacon in beacons.beacons %}
                 <tr class="active">
@@ -65,9 +65,19 @@ n type="button" class="btn btn-primary" onclick="location.href='namespace'">Name
                     {% else %}
                         <td class="active"></td>
                     {% endif %}
-                      <form class="form-horizontal" action="{{ url_for('.edit_beacon') }}" method="post">
+                    <form class="form-horizontal" id="estimote" action="{{ url_for('portal.estimote_cloud_details') }}" method="post">
+                        <input type="hidden" class="form-control" name="advid" value={{ beacon.advertisedId.id }}>
+                        <div class="form-group">
+                              <div class="col-xs-offset-4 col-xs-8">
+                                  <td class="active">
+                                      <input type="submit" class="btn btn-success" value="Estimote">
+                                  </td>
+                              </div>
+                          </div>
+                    </form>
+                      <form class="form-horizontal" action="{{ url_for('portal.edit_beacon') }}" method="post">
                           <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
-                          <input type="hidden" class="form-control" name="advid" value={{ beacon.advertisedId.id }}>        
+                          <input type="hidden" class="form-control" name="advid" value={{ beacon.advertisedId.id }}>
                           <div class="form-group">
                               <div class="col-xs-offset-4 col-xs-8">
                                   <td class="active">

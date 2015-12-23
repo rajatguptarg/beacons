@@ -3,9 +3,9 @@ Web handler for beacon manager
 """
 import base64
 import json
-from flask import Blueprint, render_template, flash, request
 import flask
 import requests
+from flask import Blueprint, render_template, flash, request
 from oauth2client import client
 from config import SCOPE, ATTACHMENT, SUCCESS, ERROR
 from beacons.portal.controller import controller
@@ -232,3 +232,13 @@ def beacon_attachment_status():
         return render_template(
             'attachment_status.jinja', status1=finalans,
             status=json.loads(status))
+
+
+@portal.route('/estimote-details', methods=['POST'])
+def estimote_cloud_details():
+    """
+    Returns the details of the beacon available on estimote cloud
+    """
+    advertised_id = request.form.get('advid')
+    beacon = controller.get_estimote_details(advertised_id)
+    return render_template('estimote_details.jinja', beacon=beacon)
