@@ -1,8 +1,14 @@
 {% extends "base.jinja" %}
 
+{% block script %}
+    <script type="text/javascript" src="../static/js/register.js"></script>
+{% endblock %}
+
 {% block title %}
     Register
 {% endblock %}
+
+
 
 {% block content %}
     <legend><h1>
@@ -14,27 +20,58 @@
         <div class="col-md-4">
           <form class="form-horizontal" action="{{ url_for('portal.register_beacons_status') }}" method="post">
                 <div class="form-group">
-                    <label class="control-label col-xs-3" for="name">Advertised ID:</label>
-                    <div class="col-xs-7">
-                        <input type="text" class="form-control" name="advid" placeholder="Enter Advertised Id of beacon">
+                    <label class="control-label col-xs-3">Type:</label>
+                    <div class="col-xs-5">
+                        <select class="form-control" name="type" id="type">
+                            <option>EDDYSTONE</option>
+                            <option>iBEACON</option>
+                        </select>
                     </div>
                 </div>
+
+                <div id="iBeaconFormContainer" class="hide">
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="uuid">UUID:</label>
+                        <div class="col-xs-7">
+                            <input type="text" class="form-control" name="uuid" placeholder="Enter iBeacon Id of beacon">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="major">Major:</label>
+                        <div class="col-xs-7">
+                            <input type="text" class="form-control" name="major" placeholder="Major">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="minor">Minor:</label>
+                        <div class="col-xs-7">
+                            <input type="text" class="form-control" name="minor" placeholder="minor">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="eddystoneFormContainer">
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="namespace">Namespace:</label>
+                        <div class="col-xs-7">
+                            <input type="text" class="form-control" name="namespace" placeholder="Enter Namespace of beacon">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-xs-3" for="instance">Instance:</label>
+                        <div class="col-xs-7">
+                            <input type="text" class="form-control" name="instance" placeholder="Enter instance of beacon">
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="form-group">
                     <label class="control-label col-xs-3">Status:</label>
                     <div class="col-xs-5">
                         <select class="form-control" name="status">
                             <option>ACTIVE</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-xs-3">Type:</label>
-                    <div class="col-xs-5">
-                        <select class="form-control" name="type">
-                            <option>EDDYSTONE</option>
-                            <option>iBEACON</option>
                         </select>
                     </div>
                 </div>
