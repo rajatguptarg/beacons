@@ -9,7 +9,7 @@ from flask import Blueprint, render_template, flash, request
 from oauth2client import client
 from config import SCOPE, ATTACHMENT, SUCCESS, ERROR
 from beacons.portal.controller import controller
-from beacons.portal.models import Beacon, Header
+from beacons.portal.models import EddyStone, Header, IBeacon
 import beacons
 
 
@@ -78,7 +78,7 @@ def register_beacons_status():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = Beacon(request.form)
+        beacon = IBeacon(request.form)
         data = controller.register_beacon(beacon, credentials)
         name = controller.get_session_username(credentials)
         if data.get('error'):
@@ -115,7 +115,7 @@ def unregister_beacons_status():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = Beacon(request.form)
+        beacon = EddyStone(request.form)
         status = controller.deactivate_beacon(beacon, credentials)
         user = controller.get_session_username(credentials)
         beacons.app.logger.info(
@@ -150,7 +150,7 @@ def edit_beacon_status():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = Beacon(request.form)
+        beacon = EddyStone(request.form)
         user = controller.get_session_username(credentials)
         status = controller.modify_beacon(beacon, credentials)
         status = SUCCESS if status.get('beaconName') else ERROR
@@ -212,7 +212,7 @@ def beacon_attachment_status():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = Beacon(request.form)
+        beacon = EddyStone(request.form)
         status = controller.attach_data_to_beacon(beacon, credentials)
         user = controller.get_session_username(credentials)
         try:
