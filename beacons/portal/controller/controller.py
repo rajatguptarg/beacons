@@ -108,4 +108,3 @@ def namespace_of_beacon(beacon_details, credentials):
     header = Header(credentials.access_token)
     response = requests.get(NAMESPACE, headers=header.__str__())
     return json.loads(response.content)
-

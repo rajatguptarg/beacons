@@ -258,8 +258,7 @@ def beacon_attachment_status():
 
 
         return render_template('attachment_status.jinja',
-             attachment=attached_data, status=json.loads(status)
-        )
+             attachment=attached_data, status=json.loads(status))
 
 
 
@@ -272,4 +271,3 @@ def estimote_cloud_details():
     advertised_id = request.form.get('advid')
     beacon = controller.get_estimote_details(advertised_id)
     return render_template('estimote_details.jinja', beacon=beacon)
-
