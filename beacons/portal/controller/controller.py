@@ -21,6 +21,16 @@ def list_beacons(credentials):
     return json.loads(response.content)
 
 
+def list_beacons_attachment(beacon, credentials):
+    """
+    Returns list of all the attachments to the beacon
+    """
+    header = Header(credentials.access_token)
+    url = url_builder.beacon_view_attachment_url(beacon)
+    response = requests.get(url, headers=header.get_header_body())
+    return response.content
+
+
 def register_beacon(beacon, credentials):
     """
     Retun the response

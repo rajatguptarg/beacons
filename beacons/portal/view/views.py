@@ -125,7 +125,6 @@ def unregister_beacons_status():
         )
 
 
-
 @portal.route('/view', methods=['POST'])
 def view_beacon():
     """
