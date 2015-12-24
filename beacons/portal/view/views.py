@@ -262,7 +262,6 @@ def beacon_attachment_status():
 
 
 
-
 @portal.route('/estimote-details', methods=['POST'])
 def estimote_cloud_details():
     """
