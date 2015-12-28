@@ -7,14 +7,24 @@
     });
 
     register.registerEvents = function(){
-        var beaconType = document.getElementById("type");
+        register.beaconType = document.getElementById("type");
+        register.iBeaconFormContainer =  $("#iBeaconFormContainer");
+        register.eddyStoneFormContainer =  $("#eddystoneFormContainer");
+       
         beaconType.onchange = function(){
             register.toggleBeaconForm();
         }
+
+        register.toggleBeaconForm();
     }
 
     register.toggleBeaconForm = function () {
-        $("#iBeaconFormContainer").toggleClass("hide");
-        $("#eddystoneFormContainer").toggleClass("hide")
+        if(register.beaconType.value == "iBEACON"){
+            register.iBeaconFormContainer.removeClass('hide')
+            register.eddyStoneFormContainer.addClass('hide')
+        }else{
+            register.iBeaconFormContainer.addClass('hide')
+            register.eddyStoneFormContainer.removeClass('hide')
+        }
     }
 })();

@@ -13,7 +13,7 @@ class IBeacon(Beacon):
         namespace = '0x' + self.uuid[:8] + self.uuid[-12:]
         major, minor = map(int, (self.major, self.minor))
         temp_instance = self._append_hex(major, minor)
-        instance = self._append_hex(temp_instance, major)
+        instance = self._append_hex(self.padding, temp_instance)
         beacon_id = self._append_hex(int(namespace, 16), instance)
         return base64.b64encode(self.long_to_bytes(beacon_id))
 

@@ -12,7 +12,7 @@ class Beacon(object):
         advertise_id = self.advertised_id()
         body = {
             "advertisedId": {
-                "type": self.beacon_type,
+                "type": "EDDYSTONE",
                 "id": advertise_id
             },
             "status": self.status,
