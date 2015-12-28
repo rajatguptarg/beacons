@@ -27,7 +27,6 @@ def list_beacons_attachment(beacon, credentials):
     """
     header = Header(credentials.access_token)
     url = url_builder.beacon_view_attachment_url(beacon)
-    print url
     response = requests.get(url, headers=header.get_header_body())
     return response.content
 
@@ -102,7 +101,7 @@ def get_estimote_details(advertised_id):
     return None
 
 
-def namespace_of_beacon(beacon_details, credentials):
+def namespace_of_beacon(credentials):
     """
     NameSpace of beacon
     """

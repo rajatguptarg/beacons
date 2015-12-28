@@ -216,9 +216,7 @@ def attachment_beacons():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = Beacon(request.form)
-        status = controller.namespace_of_beacon(beacon, credentials)
-
+        status = controller.namespace_of_beacon(credentials)
         data = status['namespaces'][0]['namespaceName']
         namespace = ((data.strip("namespaces")).replace('/', '')) + "/json"
 
