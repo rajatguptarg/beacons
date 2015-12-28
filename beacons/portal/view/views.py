@@ -7,9 +7,8 @@ import flask
 import requests
 from flask import Blueprint, render_template, flash, request
 from oauth2client import client
-from config import SCOPE, ATTACHMENT, SUCCESS, ERROR
+from config import SCOPE, SUCCESS, ERROR
 from beacons.portal.controller import controller
-from beacons.portal.models import Header
 from beacons.portal.helper import BeaconHelper
 import beacons
 
@@ -78,7 +77,7 @@ def register_beacons_status():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = IBeacon(request.form)
+        beacon = BeaconHelper.create_beacon(request.form)
         data = controller.register_beacon(beacon, credentials)
         name = controller.get_session_username(credentials)
         if data.get('error'):
@@ -111,10 +110,11 @@ def unregister_beacons_status():
     credentials = client.OAuth2Credentials.from_json(
         flask.session['credentials']
     )
+
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = EddyStone(request.form)
+        beacon = BeaconHelper.create_beacon(request.form)
         status = controller.deactivate_beacon(beacon, credentials)
         user = controller.get_session_username(credentials)
         beacons.app.logger.info(
@@ -149,7 +149,7 @@ def list_beacons_attachment():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = Beacon(request.form)
+        beacon = BeaconHelper.create_beacon(request.form)
         status = controller.list_beacons_attachment(beacon, credentials)
 
         if ("attachments") in (json.loads(status)):
@@ -188,7 +188,7 @@ def edit_beacon_status():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = EddyStone(request.form)
+        beacon = BeaconHelper.create_beacon(request.form)
         user = controller.get_session_username(credentials)
         status = controller.modify_beacon(beacon, credentials)
         status = SUCCESS if status.get('beaconName') else ERROR
@@ -237,7 +237,7 @@ def beacon_attachment_status():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = EddyStone(request.form)
+        beacon = BeaconHelper.create_beacon(request.form)
         status = controller.attach_data_to_beacon(beacon, credentials)
         user = controller.get_session_username(credentials)
         try:

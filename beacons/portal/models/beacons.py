@@ -8,7 +8,6 @@ class Beacon(object):
 
     def __init__(self, form):
         self.beacon_name = form.get('name')
-        self.advertised_id = form.get('advid')
         self.beacon_type = form.get('type')
         self.status = form.get('status')
         self.description = form.get('description')
