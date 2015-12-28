@@ -9,8 +9,6 @@ from flask import Blueprint, render_template, flash, request
 from oauth2client import client
 from config import SCOPE, SUCCESS, ERROR
 from beacons.portal.controller import controller
-from beacons.portal.models import EddyStone, IBeacon
-from beacons.portal.models import Beacon
 import beacons
 
 portal = Blueprint('portal', __name__)
