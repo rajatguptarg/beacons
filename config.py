@@ -14,6 +14,8 @@ BEACON = 'https://proximitybeacon.googleapis.com/v1beta1/'
 
 DEACTIVATE = ':deactivate'
 
+ACTIVATE = ':activate'
+
 NAMESPACE = 'https://proximitybeacon.googleapis.com/v1beta1/namespaces'
 
 ATTACH = '/attachments'

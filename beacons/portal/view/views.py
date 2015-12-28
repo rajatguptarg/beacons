@@ -100,8 +100,8 @@ def unregister_beacons():
     return render_template('unregister.jinja')
 
 
-@portal.route('/unregister', methods=['POST'])
-def unregister_beacons_status():
+@portal.route('/deactivate', methods=['POST'])
+def deactivate_beacons_status():
     """
     Returns status of deactivation of beacon
     """
@@ -115,28 +115,38 @@ def unregister_beacons_status():
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
         beacon = BeaconHelper.create_beacon(request.form)
-        status = controller.deactivate_beacon(beacon, credentials)
+        controller.deactivate_beacon(beacon, credentials)
         user = controller.get_session_username(credentials)
         beacons.app.logger.info(
             'USER: ' + user + '\nBeacon with ' + str(beacon) +
             ' unregistration successful.')
-        return render_template(
-            'unregistration_status.jinja', status=status
-        )
+        return flask.redirect(flask.url_for('portal.list_beacons'))
 
 
-@portal.route('/view', methods=['POST'])
-def view_beacon():
+@portal.route('/activate', methods=['POST'])
+def activate_beacons_status():
     """
-    Render template for edit beacon details
+    Activates the Inactive beacon
     """
-    return render_template(
-        'view.jinja', beacon=request.form.get('name'),
-        advid=request.form.get('advid')
+    if 'credentials' not in flask.session:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    credentials = client.OAuth2Credentials.from_json(
+        flask.session['credentials']
     )
 
+    if credentials.access_token_expired:
+        return flask.redirect(flask.url_for('portal.oauth2callback'))
+    else:
+        beacon = BeaconHelper.create_beacon(request.form)
+        controller.activate_beacon(beacon, credentials)
+        user = controller.get_session_username(credentials)
+        beacons.app.logger.info(
+            'USER: ' + user + '\nBeacon with ' + str(beacon) +
+            ' unregistration successful.')
+        return flask.redirect(flask.url_for('portal.list_beacons'))
 
-@portal.route('/viewattach', methods=['POST'])
+
+@portal.route('/view-attachment', methods=['POST'])
 def list_beacons_attachment():
     """
     Returns status of deactivation of beacon
@@ -156,9 +166,8 @@ def list_beacons_attachment():
             decoded_message = base64.b64decode(
                 (json.loads(status))['attachments'][0]['data']
             )
-            attached_data = json.loads(decoded_message)
             return render_template('view_attachment.jinja',
-                attachment=attached_data, status=json.loads(status))
+                attachment=decoded_message, status=json.loads(status))
         else:
             return render_template('view_attachment.jinja',
                 msg="Sorry No Attachments Found")
@@ -205,7 +214,7 @@ def edit_beacon_status():
         )
 
 
-@portal.route('/attachment')
+@portal.route('/attachment', methods=['POST'])
 def attachment_beacons():
     if 'credentials' not in flask.session:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
@@ -216,11 +225,13 @@ def attachment_beacons():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
+        beacon_name = request.form.get('name')
         status = controller.namespace_of_beacon(credentials)
         data = status['namespaces'][0]['namespaceName']
         namespace = ((data.strip("namespaces")).replace('/', '')) + "/json"
 
-    return render_template('attachment.jinja', beacon=namespace)
+    return render_template(
+        'attachment.jinja', beacon=namespace, name=beacon_name)
 
 
 @portal.route('/attachment-status', methods=['POST'])

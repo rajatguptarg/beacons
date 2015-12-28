@@ -1,22 +1,14 @@
 {% extends "base.jinja" %}
 
+{% block script %}
+    <script type="text/javascript" src="../static/js/view-attachments.js"></script>
+{% endblock %}
+
 {% block title %} Status {% endblock %}
-   
+
 {% block content %}
-      {{ status }}
+  <div class="row">
     <strong> {{msg}} <strong>
-
-  {% for key in attachment%}
-        <strong>{{key}} : </strong> {{attachment[key]}} <br>
-  {% endfor %}      
-
-  {% for key in status%}
-        {% if key == 'attachmentName' %}
-            <strong>Attachment Name:</strong> {{ status[key] }}<br>
-        {% endif %}
-        {% if key == 'namespacedType' %}
-            <strong>Namespace:</strong> {{ status[key] }}<br>
-        {% endif %}
-  {% endfor %}  
-
+    <pre id="attachmentContainer">{{attachment}}</pre>
+  </div>
 {% endblock %}

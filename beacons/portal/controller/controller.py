@@ -53,6 +53,17 @@ def deactivate_beacon(beacon_details, credentials):
     return status
 
 
+def activate_beacon(beacon_details, credentials):
+    """
+    Retun the response
+    """
+    header = Header(credentials.access_token)
+    url = url_builder.beacon_activation_url(beacon_details)
+    response = requests.post(url, headers=header.get_header_body())
+    status = ERROR if response.status_code is 400 else SUCCESS
+    return status
+
+
 def attach_data_to_beacon(beacon_details, credentials):
     """
     Attaches data to beacon

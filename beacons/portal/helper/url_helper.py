@@ -1,4 +1,4 @@
-from config import BEACON, DEACTIVATE, ATTACH, QUERY
+from config import BEACON, DEACTIVATE, ATTACH, QUERY, ACTIVATE
 
 
 class URLBuilder(object):
@@ -10,6 +10,12 @@ class URLBuilder(object):
         Returns URL to deactivate the beacons
         """
         return BEACON + beacon_details.beacon_name + DEACTIVATE
+
+    def beacon_activation_url(self, beacon_details):
+        """
+        Returns URL to deactivate the beacons
+        """
+        return BEACON + beacon_details.beacon_name + ACTIVATE
 
     def beacon_modification_url(self, beacon):
         """
