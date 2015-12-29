@@ -12,8 +12,6 @@ class Beacon(object):
         self.status = form.get('status')
         self.description = form.get('description')
         self.indoorlevel_name = form.get('indoorlevel_name')
-        self.latitude = form.get('latitude')
-        self.longitude = form.get('longitude')
         self.expected_stability = form.get('expected_stability')
         self.position = form.get('position')
         self.place_id = form.get('place_id')
@@ -32,10 +30,6 @@ class Beacon(object):
             },
             "status": self.status,
             "placeId": self.place_id,
-            "latLng": {
-                "latitude": self.latitude,
-                "longitude": self.longitude,
-            },
             "indoorLevel": {
                 "name": self.indoorlevel_name,
             },
