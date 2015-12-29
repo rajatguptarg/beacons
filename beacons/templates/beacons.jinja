@@ -77,7 +77,7 @@
                           <td class="active"></td>
                       {% endif %}
 
-                      <form class="form-horizontal" action="{{ url_for('portal.list_beacons_attachment') }}" method="post">
+                      <form class="form-horizontal" action="{{ url_for('portal.list_beacons_attachment') }}" method="get">
                         <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
                         <div class="form-group">
                             <div class="col-xs-offset-4 col-xs-8">
@@ -90,7 +90,7 @@
                         </div>
                       </form>
 
-                      <form class="form-horizontal" action="{{ url_for('portal.attachment_beacons') }}" method="post">
+                      <form class="form-horizontal" action="{{ url_for('portal.attachment_beacons') }}" method="get">
                         <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
                         <div class="form-group">
                             <div class="col-xs-offset-4 col-xs-8">
@@ -103,7 +103,7 @@
                         </div>
                       </form>
 
-                      <form class="form-horizontal" action="{{ url_for('portal.edit_beacon') }}" method="post">
+                      <form class="form-horizontal" action="{{ url_for('portal.edit_beacon') }}" method="get">
                             <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
                             <input type="hidden" class="form-control" name="advid" value={{ beacon.advertisedId.id }}>
                             <div class="form-group">
@@ -117,7 +117,7 @@
                             </div>
                       </form>
 
-                      <form class="form-horizontal" id="estimote" action="{{ url_for('portal.estimote_cloud_details') }}" method="post">
+                      <form class="form-horizontal" id="estimote" action="{{ url_for('portal.estimote_cloud_details') }}" method="get">
                           <input type="hidden" class="form-control" name="advid" value={{ beacon.advertisedId.id }}>
                           <div class="form-group">
                                 <div class="col-xs-offset-4 col-xs-8">
