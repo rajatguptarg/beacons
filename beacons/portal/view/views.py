@@ -5,14 +5,14 @@ import base64
 import json
 import flask
 import requests
-from flask import Blueprint, render_template, flash, request
+from flask import render_template, flash, request
 from oauth2client import client
 from config import SCOPE, SUCCESS, ERROR
 from beacons.portal.controller import controller
 from beacons.portal.helper import BeaconHelper
 import beacons
+from beacons.portal.view import portal
 
-portal = Blueprint('portal', __name__)
 session = requests.Session()
 
 
