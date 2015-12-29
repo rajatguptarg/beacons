@@ -1,5 +1,9 @@
 {% extends "base.jinja" %}
 
+{% block script %}
+    <script type="text/javascript" src="../static/js/editBeacon.js"></script>
+{% endblock %}
+
 {% block title %}
     Edit
 {% endblock %}
@@ -17,28 +21,14 @@
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Beacon Name:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="name" value={{ beacon }}>
+                        <input readonly type="text" class="form-control" name="name" value={{ beacon }}>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Description:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="description" placeholder="Rajat da Dhaba">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-xs-3" for="name">Indoor Level Name:</label>
-                    <div class="col-xs-7">
-                        <input type="text" class="form-control" name="indoorlevel_name" placeholder="1">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-xs-3" for="name">Position:</label>
-                    <div class="col-xs-7">
-                        <input type="text" class="form-control" name="position" placeholder="STABLE">
+                        <input id="description" type="text" class="form-control" name="description" placeholder="Security">
                     </div>
                 </div>
 
