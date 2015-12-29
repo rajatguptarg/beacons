@@ -10,16 +10,37 @@
     </h1></legend>
     <br>
     <div class="row">
-        <div class="col-md-4"></div>
-        <div class="col-md-4">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
           <form class="form-horizontal" action="" method="post">
                 {% if not beacon %}
                     <h3> This beacon is not registered on Estimote Cloud.</h3>
                 {% else %}
-                    {{ beacon }}
+                    <table class="table table-bordered" align="center">
+                        <thead>
+                            <tr class="active">
+                                <th class="info">Name</th>
+                                <th class="info" class="info">Major</th>
+                                <th class="info" class="info">Minor</th>
+                                <th class="info" class="info">UUID</th>
+                                <th class="info" class="info">Color</th>
+                                <th class="info" colspan="2"class="info">Battery Life (In Days)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="active">
+                                <td class="active">{{ beacon.name }}</td>
+                                <td class="active">{{ beacon.major }}</td>
+                                <td class="active">{{ beacon.minor }}</td>
+                                <td class="active">{{ beacon.uuid }}</td>
+                                <td class="active">{{ beacon.color }}</td>
+                                <td class="active">{{ beacon.battery_life_expectancy_in_days }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 {% endif %}
             </form>
         </div>
-        <div class="col-md-4"></div></div>
+        <div class="col-md-2"></div></div>
     </div>
 {% endblock %}
