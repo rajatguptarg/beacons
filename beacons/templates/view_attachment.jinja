@@ -7,8 +7,20 @@
 {% block title %} Status {% endblock %}
 
 {% block content %}
+	<legend><h1>
+        Beacon Attachment
+    </h1></legend>
+    <br>
   <div class="row">
-    <strong> {{msg}} <strong>
-    <pre id="attachmentContainer">{{attachment}}</pre>
+  	<div class="col-md-4"></div>
+  	<div class="col-md-4">
+	  	<div>
+	    	<strong> {{msg}} <strong>
+	    </div>
+	    <div>
+	    	<pre id="attachmentContainer">{{attachment}}</pre>
+	    </div>
+	</div>
+    <div class="col-md-4"></div>
   </div>
 {% endblock %}

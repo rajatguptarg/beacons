@@ -4,6 +4,10 @@
     box-sizing:border-box;
 }
 
+.row{
+	margin: 0;
+}
+
 .hide{
     display: none;
 }
@@ -16,4 +20,8 @@ table.table>thead>tr>th{
 table.table>tbody>tr>td{
     vertical-align : middle;
     text-align: left;
+}
+
+.beaconsContainer .form-group{
+	display: none;
 }
