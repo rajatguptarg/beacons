@@ -10,9 +10,6 @@ n type="button" class="btn btn-primary" onclick="location.href='namespace'">Name
     <div class="col-md-3"><br><br>&nbsp;</div>
     <div class="col-md-5"><br>
         <button type="button" class="btn btn-primary" onclick="location.href='register'">Register Beacon</button>
-        <button type="button" class="btn btn-primary" onclick="location.href='unregister'">Unregister Beacon</button>
-	    <button type="button" class="btn btn-primary" onclick="location.href='namespace'">NameSpace</button>
-	    <button type="button" class="btn btn-primary" onclick="location.href='attachment'">Attachment</button>
         <br><br>
     </div>
 </div>
@@ -36,59 +33,109 @@ n type="button" class="btn btn-primary" onclick="location.href='namespace'">Name
     <div class="col-md-1"></div>
     <div class="col-md-10">
         <table class="table table-bordered" align="center">
-            <tr class="active">
-                <th class="info">Sno.</th>
-                <th class="info">Name</th>
-                <th class="info" class="info" class="info" class="info">Type</th>
-                <th class="info" class="info" class="info">Advertised ID</th>
-                <th class="info" class="info">Status</th>
-                <th class="info" class="info">Description</th>
-                <th class="info" class="info">Position</th>
-                <th class="info" class="info">Indoor Level Name</th>
-                <th class="info" colspan="2" class="info">More</th>
-            </tr>
-            {% for beacon in beacons.beacons %}
-                <tr class="active">
-                    <td class="active">{{ loop.index }}</td>
-                    <td class="active">{{ beacon.beaconName }}</td>
-                    <td class="active">{{ beacon.advertisedId.type }}</td>
-                    <td class="active">{{ beacon.advertisedId.id }}</td>
-                    <td class="active">{{ beacon.status }}</td>
-                    <td class="active">{{ beacon.description }}</td>
-                    {% if beacon.properties %}
-                        <td class="active">{{ beacon.properties.position }}</td>
-                    {% else %}
-                        <td class="active"></td>
-                    {% endif %}
-                    {% if beacon.indoorLevel %}
-                        <td class="active">{{ beacon.indoorLevel.name }}</td>
-                    {% else %}
-                        <td class="active"></td>
-                    {% endif %}
-                    <form class="form-horizontal" id="estimote" action="{{ url_for('portal.estimote_cloud_details') }}" method="post">
-                        <input type="hidden" class="form-control" name="advid" value={{ beacon.advertisedId.id }}>
+          <thead>
+              <tr class="active">
+                  <th class="info">Sno.</th>
+                  <th class="info">Name</th>
+                  <th class="info" class="info">Status</th>
+                  <th class="info" class="info">Description</th>
+                  <th class="info" class="info">Position</th>
+                  <th class="info" class="info">Indoor Level</th>
+                  <th class="info" colspan="2"class="info">Attachments</th>
+                  <th class="info" colspan="3" class="info">More</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for beacon in beacons.beacons %}
+                  <tr class="active">
+                      <td class="active">{{ loop.index }}</td>
+                      <td class="active">{{ beacon.beaconName }}</td>
+                      <td class="active">{{ beacon.status }}</td>
+                      <td class="active">{{ beacon.description }}</td>
+                      {% if beacon.properties %}
+                          <td class="active">{{ beacon.properties.position}}</td>
+                      {% else %}
+                          <td class="active"></td>
+                      {% endif %}
+                      {% if beacon.indoorLevel %}
+                          <td class="active">{{ beacon.indoorLevel.name }}</td>
+                      {% else %}
+                          <td class="active"></td>
+                      {% endif %}
+
+                      <form class="form-horizontal" action="{{ url_for('portal.list_beacons_attachment') }}" method="post">
+                        <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
                         <div class="form-group">
-                              <div class="col-xs-offset-4 col-xs-8">
-                                  <td class="active">
-                                      <input type="submit" class="btn btn-success" value="Estimote">
-                                  </td>
-                              </div>
-                          </div>
-                    </form>
-                      <form class="form-horizontal" action="{{ url_for('portal.edit_beacon') }}" method="post">
-                          <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
+                            <div class="col-xs-offset-4 col-xs-8">
+                                <td class="active">
+                                    <input type="submit" class="btn btn-success" value="View">
+                                </td>
+                            </div>
+                        </div>
+                      </form>
+
+                      <form class="form-horizontal" action="{{ url_for('portal.attachment_beacons') }}" method="post">
+                        <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
+                        <div class="form-group">
+                            <div class="col-xs-offset-4 col-xs-8">
+                                <td class="active">
+                                    <input type="submit" class="btn btn-success" value="Add">
+                                </td>
+                            </div>
+                        </div>
+                      </form>
+
+
+                      {% if beacon.status  == 'ACTIVE' %}
+                          <form class="form-horizontal" id="estimote" action="{{ url_for('portal.deactivate_beacons_status') }}" method="post">
+                              <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
+                              <div class="form-group">
+                                    <div class="col-xs-offset-4 col-xs-8">
+                                        <td class="active">
+                                            <input type="submit" class="btn btn-success" value="Deactivate">
+                                        </td>
+                                    </div>
+                                </div>
+                          </form>
+                      {% else %}
+                          <form class="form-horizontal" id="estimote" action="{{ url_for('portal.activate_beacons_status') }}" method="post">
+                              <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
+                              <div class="form-group">
+                                    <div class="col-xs-offset-4 col-xs-8">
+                                        <td class="active">
+                                            <input type="submit" class="btn btn-success" value="&nbsp;&nbsp;Activate&nbsp;&nbsp;">
+                                        </td>
+                                    </div>
+                                </div>
+                          </form>
+                      {% endif %}
+
+                      <form class="form-horizontal" id="estimote" action="{{ url_for('portal.estimote_cloud_details') }}" method="post">
                           <input type="hidden" class="form-control" name="advid" value={{ beacon.advertisedId.id }}>
                           <div class="form-group">
-                              <div class="col-xs-offset-4 col-xs-8">
-                                  <td class="active">
-                                      <input type="submit" class="btn btn-success" value="Edit">
-                                  </td>
-                              </div>
-                          </div>
+                                <div class="col-xs-offset-4 col-xs-8">
+                                    <td class="active">
+                                        <input type="submit" class="btn btn-success" value="Details">
+                                    </td>
+                                </div>
+                            </div>
                       </form>
-                </tr>
-            {% endfor %}
-            <br>
+
+                      <form class="form-horizontal" action="{{ url_for('portal.edit_beacon') }}" method="post">
+                            <input type="hidden" class="form-control" name="name" value={{ beacon.beaconName }}>
+                            <input type="hidden" class="form-control" name="advid" value={{ beacon.advertisedId.id }}>
+                            <div class="form-group">
+                                <div class="col-xs-offset-4 col-xs-8">
+                                    <td class="active">
+                                        <input type="submit" class="btn btn-success" value="Edit">
+                                    </td>
+                                </div>
+                            </div>
+                      </form>
+                  </tr>
+              {% endfor %}
+              <br>
+            </tbody>
         </table>
     </div>
     <div class="col-md-1"></div>

@@ -5,6 +5,21 @@ class Beacon(object):
     """
     Beacon Details
     """
+
+    def __init__(self, form):
+        self.beacon_name = form.get('name')
+        self.beacon_type = form.get('type')
+        self.status = form.get('status')
+        self.description = form.get('description')
+        self.indoorlevel_name = form.get('indoorlevel_name')
+        self.latitude = form.get('latitude')
+        self.longitude = form.get('longitude')
+        self.expected_stability = form.get('expected_stability')
+        self.position = form.get('position')
+        self.place_id = form.get('place_id')
+        self.msg = form.get('msg')
+        self.namespace = form.get('namespace')
+
     def registration_request_body(self):
         """
         Return the request body in json format
@@ -78,20 +93,6 @@ class Beacon(object):
         Return advertised id
         """
         pass
-
-    def __init__(self, form):
-        self.beacon_name = form.get('name')
-        self.beacon_type = form.get('type')
-        self.status = form.get('status')
-        self.description = form.get('description')
-        self.indoorlevel_name = form.get('indoorlevel_name')
-        self.latitude = form.get('latitude')
-        self.longitude = form.get('longitude')
-        self.expected_stability = form.get('expected_stability')
-        self.position = form.get('position')
-        self.place_id = form.get('place_id')
-        self.msg = form.get('msg')
-        self.namespace = "proximity-test-1146/json"
 
     def __str__(self):
         if self.beacon_name:

@@ -1,0 +1,14 @@
+{% extends "base.jinja" %}
+
+{% block script %}
+    <script type="text/javascript" src="../static/js/view-attachments.js"></script>
+{% endblock %}
+
+{% block title %} Status {% endblock %}
+
+{% block content %}
+  <div class="row">
+    <strong> {{msg}} <strong>
+    <pre id="attachmentContainer">{{attachment}}</pre>
+  </div>
+{% endblock %}

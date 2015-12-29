@@ -14,15 +14,19 @@ BEACON = 'https://proximitybeacon.googleapis.com/v1beta1/'
 
 DEACTIVATE = ':deactivate'
 
-ATTACHMENT = 'https://proximitybeacon.googleapis.com/v1beta1/namespaces'
+ACTIVATE = ':activate'
 
-ATTACH_BEACONS = 'https://proximitybeacon.googleapis.com/v1beta1/'
+NAMESPACE = 'https://proximitybeacon.googleapis.com/v1beta1/namespaces'
 
 ATTACH = '/attachments'
+
+QUERY = '?namespacedType=*/*'
 
 ERROR = 'ERROR'
 
 SUCCESS = 'SUCCESS'
+
+QUERY = '?namespacedType=*/*'
 
 USER_INFO = 'https://www.googleapis.com/oauth2/v1/userinfo'
 

@@ -5,7 +5,7 @@ import requests
 from beacons.portal.models import Header
 from beacons.portal.helper import BeaconHelper, URLBuilder
 from config import REGISTER_BEACONS, ERROR, SUCCESS, LIST_BEACONS, \
-    USER_INFO, ESTIMOTE_CMD
+    USER_INFO, ESTIMOTE_CMD, NAMESPACE
 
 
 beacon_helper = BeaconHelper()
@@ -19,6 +19,16 @@ def list_beacons(credentials):
     header = Header(credentials.access_token)
     response = requests.get(LIST_BEACONS, headers=header.get_header_body())
     return json.loads(response.content)
+
+
+def list_beacons_attachment(beacon, credentials):
+    """
+    Returns list of all the attachments to the beacon
+    """
+    header = Header(credentials.access_token)
+    url = url_builder.beacon_view_attachment_url(beacon)
+    response = requests.get(url, headers=header.get_header_body())
+    return response.content
 
 
 def register_beacon(beacon, credentials):
@@ -38,6 +48,17 @@ def deactivate_beacon(beacon_details, credentials):
     """
     header = Header(credentials.access_token)
     url = url_builder.beacon_deactivation_url(beacon_details)
+    response = requests.post(url, headers=header.get_header_body())
+    status = ERROR if response.status_code is 400 else SUCCESS
+    return status
+
+
+def activate_beacon(beacon_details, credentials):
+    """
+    Retun the response
+    """
+    header = Header(credentials.access_token)
+    url = url_builder.beacon_activation_url(beacon_details)
     response = requests.post(url, headers=header.get_header_body())
     status = ERROR if response.status_code is 400 else SUCCESS
     return status
@@ -89,3 +110,12 @@ def get_estimote_details(advertised_id):
         if beacon_namespace == namespace and beacon_instane == instance:
             return beacon
     return None
+
+
+def namespace_of_beacon(credentials):
+    """
+    NameSpace of beacon
+    """
+    header = Header(credentials.access_token)
+    response = requests.get(NAMESPACE, headers=header.__str__())
+    return json.loads(response.content)
