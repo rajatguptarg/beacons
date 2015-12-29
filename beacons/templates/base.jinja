@@ -3,8 +3,11 @@
 <head>
     {% block head %}
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="../static/css/base.css" rel="stylesheet">
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../static/js/base.js"></script>
+
+    <link href="../static/css/base.css" rel="stylesheet">
     <title>{% block title %}{% endblock %} - Beacons</title>
     {% block script %}
     {% endblock %}
@@ -14,7 +17,7 @@
     <div class="row">
         <a class="row" href="/">
             <div class="col-md-3">
-                <h1>Welcome To <strong>KIAB</strong></h1>
+                <h1>Beacon Manager</h1>
             </div>
         </a>
     <div id="content">{% block content %}{% endblock %}</div>

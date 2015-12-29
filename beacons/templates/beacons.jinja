@@ -7,13 +7,15 @@
 {% block content %}
 
 <legend>
-  <h1>Beacon Manager</h1>
+  <h3>Beacons</h3>
 </legend>
 
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-10">
-      <button type="button" class="btn btn-primary pull-right" onclick="location.href='register'">Register Beacon</button>
+      <button type="button" class="btn btn-success pull-right" onclick="location.href='register'">
+          <span class="glyphicon glyphicon-plus"></span> &nbsp;Add Beacon
+      </button>
   </div>
   <div class="col-md-1"></div>
 </div>
@@ -45,7 +47,7 @@
                               <div class="form-group">
                                     <div class="col-xs-offset-4 col-xs-8">
                                         <td class="active">
-                                            <input type="submit" class="btn btn-success" value="&nbsp;&nbsp;Active&nbsp;&nbsp;">
+                                            <input type="submit" data-toggle="tooltip" title="Click to deactivate" class="btn btn-success" value="&nbsp;&nbsp;Active&nbsp;&nbsp;">
                                         </td>
                                     </div>
                                 </div>
@@ -56,7 +58,7 @@
                               <div class="form-group">
                                     <div class="col-xs-offset-4 col-xs-8">
                                         <td class="active">
-                                            <input type="submit" class="btn btn-danger" value="InActive">
+                                            <input type="submit" data-toggle="tooltip" title="Click to Activate" class="btn btn-danger" value="InActive">
                                         </td>
                                     </div>
                                 </div>
@@ -80,7 +82,9 @@
                         <div class="form-group">
                             <div class="col-xs-offset-4 col-xs-8">
                                 <td class="active">
-                                    <input type="submit" class="btn btn-success" value="View">
+                                    <Button type="submit" data-toggle="tooltip" title="View attachment" class="btn btn-success">
+                                        <span class="glyphicon glyphicon-list-alt"></span>
+                                    </button>
                                 </td>
                             </div>
                         </div>
@@ -91,7 +95,9 @@
                         <div class="form-group">
                             <div class="col-xs-offset-4 col-xs-8">
                                 <td class="active">
-                                    <input type="submit" class="btn btn-success" value="Add">
+                                    <button type="submit" data-toggle="tooltip" title="Edit beacon attachment" class="btn btn-success" >
+                                        <span class="glyphicon glyphicon-paperclip"></span>
+                                    </button>
                                 </td>
                             </div>
                         </div>
@@ -103,7 +109,9 @@
                             <div class="form-group">
                                 <div class="col-xs-offset-4 col-xs-8">
                                     <td class="active">
-                                        <input type="submit" class="btn btn-success" value="Edit">
+                                        <button type="submit" data-toggle="tooltip" title="Edit Beacon" class="btn btn-success" value="Edit">
+                                            <span class="glyphicon glyphicon-pencil"></span>
+                                        </button>
                                     </td>
                                 </div>
                             </div>
@@ -114,7 +122,9 @@
                           <div class="form-group">
                                 <div class="col-xs-offset-4 col-xs-8">
                                     <td class="active">
-                                        <input type="submit" class="btn btn-success" value="Details">
+                                        <button type="submit" data-toggle="tooltip" title="Beacon Health and etc" class="btn btn-success" value="Details">
+                                            <span class="glyphicon glyphicon-file"></span>
+                                        </button>
                                     </td>
                                 </div>
                             </div>
