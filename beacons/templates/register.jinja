@@ -20,7 +20,7 @@
         <div class="col-md-6">
           <form class="form-horizontal" action="{{ url_for('portal.register_beacons_status') }}" method="post">
                 <div class="form-group">
-                    <label class="control-label col-xs-3">Type:</label>
+                    <label class="control-label col-xs-3">Type : </label>
                     <div class="col-xs-7">
                         <select class="form-control" name="type" id="type">
                             <option>EDDYSTONE</option>
@@ -31,43 +31,43 @@
 
                 <div id="iBeaconFormContainer" class="hidden">
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="uuid">UUID:</label>
+                        <label class="control-label col-xs-3" for="uuid">UUID : </label>
                         <div class="col-xs-7">
-                            <input type="text" class="form-control" name="uuid" placeholder="Enter iBeacon Id of beacon">
+                            <input type="text" id="uuid" class="form-control" name="uuid" placeholder="Enter iBeacon Id of beacon">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="major">Major:</label>
+                        <label class="control-label col-xs-3" for="major">Major : </label>
                         <div class="col-xs-7">
-                            <input type="text" class="form-control" name="major" placeholder="Major">
+                            <input type="text" id="major" class="form-control" name="major" placeholder="Major">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="minor">Minor:</label>
+                        <label class="control-label col-xs-3" for="minor">Minor :</label>
                         <div class="col-xs-7">
-                            <input type="text" class="form-control" name="minor" placeholder="minor">
+                            <input type="text" id="minor" class="form-control" name="minor" placeholder="minor">
                         </div>
                     </div>
                 </div>
 
                 <div id="eddystoneFormContainer">
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="namespace">Namespace:</label>
+                        <label class="control-label col-xs-3" for="namespace">Namespace :</label>
                         <div class="col-xs-7">
-                            <input type="text" class="form-control" name="namespace" placeholder="Enter Namespace of beacon">
+                            <input type="text" id="namespace" class="form-control" name="namespace" placeholder="Enter Namespace of beacon">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="control-label col-xs-3" for="instance">Instance:</label>
+                        <label class="control-label col-xs-3" for="instance">Instance :</label>
                         <div class="col-xs-7">
-                            <input type="text" class="form-control" name="instance" placeholder="Enter instance of beacon">
+                            <input type="text" id="instanceId" class="form-control" name="instance" placeholder="Enter instance of beacon">
                         </div>
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-xs-3">Status:</label>
+                    <label class="control-label col-xs-3">Status :</label>
                     <div class="col-xs-7">
                         <select class="form-control" name="status">
                             <option>ACTIVE</option>
@@ -77,14 +77,14 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-xs-3" for="name">Description:</label>
+                    <label class="control-label col-xs-3" for="name">Description :</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="description" placeholder="Security Check">
+                        <input type="text" id="description" class="form-control" name="description" placeholder="Security Check">
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-xs-3" for="name">Expected Stability:</label>
+                    <label class="control-label col-xs-3" for="name">Expected Stability :</label>
                     <div class="col-xs-7">
                         <select class="form-control" name="expected_stability">
                             <option>STABLE</option>
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="control-label col-xs-3" for="name">Place ID:</label>
+                    <label class="control-label col-xs-3" for="name">Place ID :</label>
                     <div class="col-xs-7">
                         <input type="text" class="form-control" name="place_id" placeholder="ChIJTxax6NoSkFQRWPvFXI1LypQ">
                     </div>
