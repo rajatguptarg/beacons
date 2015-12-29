@@ -11,7 +11,7 @@
         register.iBeaconFormContainer =  $("#iBeaconFormContainer");
         register.eddyStoneFormContainer =  $("#eddystoneFormContainer");
        
-        beaconType.onchange = function(){
+        register.beaconType.onchange = function(){
             register.toggleBeaconForm();
         }
 
@@ -20,11 +20,11 @@
 
     register.toggleBeaconForm = function () {
         if(register.beaconType.value == "iBEACON"){
-            register.iBeaconFormContainer.removeClass('hide')
-            register.eddyStoneFormContainer.addClass('hide')
+            register.iBeaconFormContainer.removeClass('hidden')
+            register.eddyStoneFormContainer.addClass('hidden')
         }else{
-            register.iBeaconFormContainer.addClass('hide')
-            register.eddyStoneFormContainer.removeClass('hide')
+            register.iBeaconFormContainer.addClass('hidden')
+            register.eddyStoneFormContainer.removeClass('hidden')
         }
     }
 })();
