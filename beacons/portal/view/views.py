@@ -226,12 +226,21 @@ def attachment_beacons():
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
         beacon_name = request.args.get('name')
+        decoded_message = ''
+        beacon = BeaconHelper.create_beacon(request.args)
         status = controller.namespace_of_beacon(credentials)
         data = status['namespaces'][0]['namespaceName']
         namespace = ((data.strip("namespaces")).replace('/', '')) + "/json"
+        status = controller.list_beacons_attachment(beacon, credentials)
+
+        if ("attachments") in (json.loads(status)):
+            decoded_message = base64.b64decode(
+                (json.loads(status))['attachments'][0]['data']
+            )
 
     return render_template(
-        'attachment.jinja', beacon=namespace, name=beacon_name)
+        'attachment.jinja', beacon=namespace, name=beacon_name,
+        attachment=decoded_message)
 
 
 @portal.route('/attachment-status', methods=['POST'])
