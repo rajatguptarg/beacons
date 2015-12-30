@@ -70,9 +70,12 @@ def attach_data_to_beacon(beacon_details, credentials):
     """
     request_body = beacon_details.attachment_request_body()
     header = Header(credentials.access_token)
+    delete_url = url_builder.batch_delete_url(beacon_details)
+    status = requests.post(delete_url, headers=header.get_header_body())
     url = url_builder.beacon_attachment_url(beacon_details)
-    response = requests.post(url, data=json.dumps(request_body),
-        headers=header.get_header_body())
+    if status.status_code is 200:
+        response = requests.post(url, data=json.dumps(request_body),
+            headers=header.get_header_body())
     return response.content
 
 

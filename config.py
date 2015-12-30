@@ -24,6 +24,8 @@ QUERY = '?namespacedType=*/*'
 
 ERROR = 'ERROR'
 
+BATCH_DELETE = ':batchDelete?namespacedType=*/*'
+
 SUCCESS = 'SUCCESS'
 
 QUERY = '?namespacedType=*/*'

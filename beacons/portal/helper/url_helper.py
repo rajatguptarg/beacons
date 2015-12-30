@@ -1,4 +1,5 @@
-from config import BEACON, DEACTIVATE, ATTACH, QUERY, ACTIVATE
+from config import BEACON, DEACTIVATE, ATTACH, QUERY, ACTIVATE, \
+    BATCH_DELETE
 
 
 class URLBuilder(object):
@@ -34,6 +35,12 @@ class URLBuilder(object):
         Returns URL to attach data to the beacons
         """
         return BEACON + beacon_details.beacon_name + ATTACH + QUERY
+
+    def batch_delete_url(self, beacon):
+        """
+        Returns URL to batch delete attachments
+        """
+        return BEACON + beacon.beacon_name + ATTACH + BATCH_DELETE
 
     def __init__(self):
         super(URLBuilder, self).__init__()

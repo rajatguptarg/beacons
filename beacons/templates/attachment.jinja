@@ -1,13 +1,17 @@
 {% extends "base.jinja" %}
 
+{% block script %}
+    <script type="text/javascript" src="../static/js/attachment.js"></script>
+{% endblock %}
+
 {% block title %}
     Attach
 {% endblock %}
 
 {% block content %}
-    <legend><h1>
+    <legend><h3>
         Attach Message To Beacon
-    </h1></legend>
+    </h3></legend>
     <br>
     <div class="row">
         <div class="col-md-4"></div>
@@ -18,7 +22,7 @@
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">NameSpace:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="namespace" value={{beacon}}>
+                        <input type="text" readonly class="form-control" name="namespace" value={{beacon}}>
                     </div>
                 </div>
 
@@ -27,19 +31,14 @@
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Beacon Name:</label>
                     <div class="col-xs-7">
-                        <input type="text" class="form-control" name="name" value={{ name }}>
+                        <input type="text" readonly class="form-control" name="name" value={{ name }}>
                     </div>
                 </div>
-
-                <br>
-                {% for message in get_flashed_messages() %}
-                    <div class="flash" style="color: red">{{ message }}</div>
-                {% endfor %}
 
                 <div class="form-group">
                     <label class="control-label col-xs-3" for="name">Message:</label>
                     <div class="col-xs-7">
-                        <textarea rows=5 cols=40 class="form-control" name="msg" placeholder="Enter Message to attach"></textarea>
+                        <textarea id="description" rows=5 cols=40 class="form-control" name="msg" placeholder="Enter Message to attach">{{ attachment }}</textarea>
                     </div>
                 </div>
 
@@ -48,7 +47,7 @@
 
                 <div class="form-group">
                     <div class="col-xs-offset-4 col-xs-8">
-                        <input type="submit" onclick="myFunction()" class="btn btn-success" value="Submit">
+                        <input type="submit" class="btn btn-success" value="Submit">
                         <input type="reset" class="btn btn-danger" value="Reset">
                     </div>
                 </div>
@@ -56,8 +55,4 @@
         </div>
         <div class="col-md-4"></div></div>
     </div>
-    <script>
-    function myFunction() {
-        alert("hello")
-    </script>
 {% endblock %}

@@ -146,7 +146,7 @@ def activate_beacons_status():
         return flask.redirect(flask.url_for('portal.list_beacons'))
 
 
-@portal.route('/view-attachment', methods=['POST'])
+@portal.route('/view-attachment', methods=['GET'])
 def list_beacons_attachment():
     """
     Returns status of deactivation of beacon
@@ -159,7 +159,7 @@ def list_beacons_attachment():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon = BeaconHelper.create_beacon(request.form)
+        beacon = BeaconHelper.create_beacon(request.args)
         status = controller.list_beacons_attachment(beacon, credentials)
 
         if ("attachments") in (json.loads(status)):
@@ -173,14 +173,14 @@ def list_beacons_attachment():
                 msg="Sorry No Attachments Found")
 
 
-@portal.route('/edit', methods=['POST'])
+@portal.route('/edit', methods=['GET'])
 def edit_beacon():
     """
     Render template for edit beacon details
     """
     return render_template(
-        'edit_beacon.jinja', beacon=request.form.get('name'),
-        advid=request.form.get('advid')
+        'edit_beacon.jinja', beacon=request.args.get('name'),
+        advid=request.args.get('advid')
     )
 
 
@@ -214,7 +214,7 @@ def edit_beacon_status():
         )
 
 
-@portal.route('/attachment', methods=['POST'])
+@portal.route('/attachment', methods=['GET'])
 def attachment_beacons():
     if 'credentials' not in flask.session:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
@@ -225,13 +225,22 @@ def attachment_beacons():
     if credentials.access_token_expired:
         return flask.redirect(flask.url_for('portal.oauth2callback'))
     else:
-        beacon_name = request.form.get('name')
+        beacon_name = request.args.get('name')
+        decoded_message = ''
+        beacon = BeaconHelper.create_beacon(request.args)
         status = controller.namespace_of_beacon(credentials)
         data = status['namespaces'][0]['namespaceName']
         namespace = ((data.strip("namespaces")).replace('/', '')) + "/json"
+        status = controller.list_beacons_attachment(beacon, credentials)
+
+        if ("attachments") in (json.loads(status)):
+            decoded_message = base64.b64decode(
+                (json.loads(status))['attachments'][0]['data']
+            )
 
     return render_template(
-        'attachment.jinja', beacon=namespace, name=beacon_name)
+        'attachment.jinja', beacon=namespace, name=beacon_name,
+        attachment=decoded_message)
 
 
 @portal.route('/attachment-status', methods=['POST'])
@@ -270,11 +279,11 @@ def beacon_attachment_status():
              attachment=attached_data, status=json.loads(status))
 
 
-@portal.route('/estimote-details', methods=['POST'])
+@portal.route('/estimote-details', methods=['GET'])
 def estimote_cloud_details():
     """
     Returns the details of the beacon available on estimote cloud
     """
-    advertised_id = request.form.get('advid')
+    advertised_id = request.args.get('advid')
     beacon = controller.get_estimote_details(advertised_id)
     return render_template('estimote_details.jinja', beacon=beacon)
