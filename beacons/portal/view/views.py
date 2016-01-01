@@ -4,6 +4,7 @@ Web handler for beacon manager
 import base64
 import json
 import flask
+import sys
 import requests
 from flask import render_template, flash, request
 from oauth2client import client
@@ -42,8 +43,7 @@ def oauth2callback():
     OAuth2.0 Callback
     """
     flow = client.flow_from_clientsecrets(
-        'client_secrets.json',
-        scope=SCOPE,
+        sys.argv[1], scope=SCOPE,
         redirect_uri=flask.url_for('portal.oauth2callback', _external=True),
     )
     if 'code' not in flask.request.args:
