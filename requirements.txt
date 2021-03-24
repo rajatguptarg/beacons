@@ -30,7 +30,7 @@ pyflakes==1.0.0
 python-dateutil==2.4.2
 python-mimeparse==0.1.4
 requests==2.8.1
-rsa==3.2.3
+rsa==4.1
 simplejson==3.8.1
 singledispatch==3.4.0.3
 six==1.10.0
